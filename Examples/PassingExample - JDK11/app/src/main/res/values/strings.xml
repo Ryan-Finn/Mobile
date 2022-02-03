@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PassingExample</string>
+    <string name="x">X</string>
+    <string name="y">Y</string>
+    <string name="z">Z</string>
+    <string name="choose_activity">Choose Activity</string>
+    <string name="input_text">Input text to be sent</string>
+    <string name="returned">Returned:</string>
+</resources>

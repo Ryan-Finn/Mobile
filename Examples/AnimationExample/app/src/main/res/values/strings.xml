@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Animation Example</string>
+    <string name="animation_spinning_lines">Spinning Lines</string>
+    <string name="animation_bouncy_gnome">The Bouncy Gnome</string>
+    <string name="animation_spinning_box">Spinning Box</string>
+    <string name="animation_spinning_text">Spinning Text</string>
+
+</resources>
