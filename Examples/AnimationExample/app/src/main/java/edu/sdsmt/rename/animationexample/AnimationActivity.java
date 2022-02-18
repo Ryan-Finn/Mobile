@@ -2,7 +2,6 @@ package edu.sdsmt.rename.animationexample;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
