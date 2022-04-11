@@ -40,10 +40,10 @@ public class GameView extends View {
         init(context);
     }
 
-    private void init(Context context) {
+    public void init(Context context) {
         TypedValue typedValue = new TypedValue();
         Resources.Theme theme = context.getTheme();
-        area = new Game(getContext());
+        area = new Game(context);
 
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         fillPaint.setColor(Color.LTGRAY);
@@ -71,6 +71,18 @@ public class GameView extends View {
         }
 
         canvas.restore();
+    }
+
+    public void newDay() {
+        area.newDay();
+    }
+
+    public void reset() {
+        area.reset();
+    }
+
+    public void eat() {
+        area.eat();
     }
 
     @Override
