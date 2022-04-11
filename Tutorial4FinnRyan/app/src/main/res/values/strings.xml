@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Mad Hatter Finn Ryan</string>
+    <string name="picture">Picture</string>
+    <string name="color">Color</string>
+    <string name="feather">Feather</string>
+    <string name="no_load">Not Loaded</string>
+    <string-array name="hats_spinner">
+        <item>Stetson Black Rancher</item>
+        <item>Stetson Gray 20X</item>
+        <item>Custom</item>
+    </string-array>
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PQ1 Finn Ryan</string>
+    <string name="buttonText">Start</string>
+    <string name="textField">Name</string>
+    <string name="imageDesc">Grubby</string>
+    <string name="welcomeText">"Welcome: "</string>
+    <string name="addY">Add Y</string>
+    <string name="addX">Add X</string>
+    <string name="subY">Sub Y</string>
+    <string name="subX">Sub X</string>
+</resources>

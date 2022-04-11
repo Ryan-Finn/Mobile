@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconLocation">
+        <ignore path="src/main/res/drawable/colors.png" />
+        <ignore path="src/main/res/drawable/feather.png" />
+        <ignore path="src/main/res/drawable/hat_black.png" />
+        <ignore path="src/main/res/drawable/hat_gray.png" />
+        <ignore path="src/main/res/drawable/hat_white.png" />
+        <ignore path="src/main/res/drawable/hat_white_band.png" />
+    </issue>
+</lint>

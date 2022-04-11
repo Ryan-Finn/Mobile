@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Tutorial 1 Finn Ryan</string>
+    <string name="greeting">Welcome to Ryan Finn\'s Program</string>
+    <string name="button_text">Don\'t Press This Button</string>
+</resources>

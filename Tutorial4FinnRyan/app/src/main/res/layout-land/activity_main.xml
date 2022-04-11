@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HatterActivity">
+
+    <edu.sdsmt.t4_finn_ryan.HatterView
+        android:id="@+id/hatterView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="4dp"
+        android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonPicture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:onClick="onPicture"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:text="@string/picture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonColor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onColor"
+        android:text="@string/color"
+        app:layout_constraintEnd_toEndOf="@+id/buttonPicture"
+        app:layout_constraintStart_toStartOf="@+id/buttonPicture"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPicture" />
+
+    <Spinner
+        android:id="@+id/spinnerHat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/hats_spinner"
+        android:minHeight="48dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="@+id/buttonColor"
+        app:layout_constraintStart_toStartOf="@+id/buttonColor"
+        app:layout_constraintTop_toBottomOf="@+id/buttonColor" />
+
+    <CheckBox
+        android:id="@+id/checkFeather"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/feather"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerHat"
+        app:layout_constraintStart_toStartOf="@+id/spinnerHat"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerHat" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

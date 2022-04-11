@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "614477195870",
+    "firebase_url": "https://mobilemadhatter-75ffc-default-rtdb.firebaseio.com",
+    "project_id": "mobilemadhatter-75ffc",
+    "storage_bucket": "mobilemadhatter-75ffc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614477195870:android:03519c7af8d6273c9262cf",
+        "android_client_info": {
+          "package_name": "edu.sdsmt.finn_ryan.tutorial5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614477195870-2dtcesi43hll35om6em00ebqrbrj9ued.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5nzBQQLckAFY1cQ18zHeR79jgXOcCJYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614477195870-2dtcesi43hll35om6em00ebqrbrj9ued.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
