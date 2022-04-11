@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/7401035/AndroidStudioProjects/Mobile/StoptheTribblesFinnRyan/app/src/main/res/layout-land/activity_main.xml" value="0.21957671957671956" />
+        <entry key="..\:/Users/7401035/AndroidStudioProjects/Mobile/StoptheTribblesFinnRyan/app/src/main/res/layout/activity_border.xml" value="0.259375" />
+        <entry key="..\:/Users/7401035/AndroidStudioProjects/Mobile/StoptheTribblesFinnRyan/app/src/main/res/layout/activity_classic.xml" value="0.259375" />
+        <entry key="..\:/Users/7401035/AndroidStudioProjects/Mobile/StoptheTribblesFinnRyan/app/src/main/res/layout/activity_gamepad.xml" value="0.259375" />
+        <entry key="..\:/Users/7401035/AndroidStudioProjects/Mobile/StoptheTribblesFinnRyan/app/src/main/res/layout/activity_grid.xml" value="0.259375" />
+        <entry key="..\:/Users/7401035/AndroidStudioProjects/Mobile/StoptheTribblesFinnRyan/app/src/main/res/layout/activity_main.xml" value="0.259375" />
         <entry key="..\:/Users/Finnster/AndroidStudioProjects/StoptheTribblesFinnRyan/app/src/main/res/layout/activity_main.xml" value="0.21693840579710144" />
       </map>
     </option>
