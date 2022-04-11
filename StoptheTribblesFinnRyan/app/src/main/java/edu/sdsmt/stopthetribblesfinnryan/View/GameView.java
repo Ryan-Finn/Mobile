@@ -4,31 +4,34 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
+import edu.sdsmt.stopthetribblesfinnryan.Model.Game;
 import edu.sdsmt.stopthetribblesfinnryan.R;
 
-public class GameAreaView extends View {
+public class GameView extends View {
+    private Game area;
     private final Touch touch1 = new Touch();
     private final Touch touch2 = new Touch();
     private Paint fillPaint;
     private Paint outlinePaint;
 
-    public GameAreaView(Context context) {
+    public GameView(Context context) {
         super(context);
         init(context);
     }
 
-    public GameAreaView(Context context, AttributeSet attrs) {
+    public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public GameAreaView(Context context, AttributeSet attrs, int defStyle) {
+    public GameView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
     }
@@ -38,7 +41,7 @@ public class GameAreaView extends View {
         Resources.Theme theme = context.getTheme();
 
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        fillPaint.setColor(0xffcccccc);
+        fillPaint.setColor(Color.LTGRAY);
 
         outlinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         outlinePaint.setStyle(Paint.Style.STROKE);

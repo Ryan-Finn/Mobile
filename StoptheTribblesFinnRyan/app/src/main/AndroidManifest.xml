@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StopTheTribblesFinnRyan">
         <activity
-            android:name=".Model.MainActivity"
+            android:name=".Control.GameActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

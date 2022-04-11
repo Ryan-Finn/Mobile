@@ -1,4 +1,4 @@
-package edu.sdsmt.stopthetribblesfinnryan.Model;
+package edu.sdsmt.stopthetribblesfinnryan.Control;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import edu.sdsmt.stopthetribblesfinnryan.R;
 
-public class MainActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
     private TextView hunger, days;
     private Button eat;
 

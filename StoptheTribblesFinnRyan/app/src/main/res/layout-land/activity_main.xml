@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background"
-    tools:context=".Model.MainActivity">
+    tools:context=".Control.GameActivity">
 
     <TextView
         android:id="@+id/title"
@@ -91,7 +91,7 @@
         app:layout_constraintStart_toStartOf="@+id/scoreText"
         app:layout_constraintTop_toBottomOf="@+id/scoreText" />
 
-    <edu.sdsmt.stopthetribblesfinnryan.View.GameAreaView
+    <edu.sdsmt.stopthetribblesfinnryan.View.GameView
         android:id="@+id/gameAreaView"
         android:layout_width="0dp"
         android:layout_height="0dp"
