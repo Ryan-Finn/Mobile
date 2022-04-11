@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/background"
+    tools:context=".Model.MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="?attr/onBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scoreText"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?attr/onBackground"
+        app:layout_constraintBottom_toTopOf="@+id/score"
+        app:layout_constraintEnd_toStartOf="@+id/countText"
+        app:layout_constraintStart_toEndOf="@+id/hunger"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/countText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/countText"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?attr/onBackground"
+        app:layout_constraintBottom_toTopOf="@+id/count"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/scoreText"
+        app:layout_constraintTop_toTopOf="@+id/scoreText"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/hunger"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hunger"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?attr/onBackground"
+        app:layout_constraintBottom_toTopOf="@+id/days"
+        app:layout_constraintEnd_toStartOf="@+id/scoreText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scoreText" />
+
+    <TextView
+        android:id="@+id/days"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/days"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?attr/onBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/score"
+        app:layout_constraintStart_toStartOf="@+id/hunger"
+        app:layout_constraintTop_toBottomOf="@+id/hunger" />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/count"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="?attr/onBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/score"
+        app:layout_constraintEnd_toEndOf="@+id/countText"
+        app:layout_constraintStart_toStartOf="@+id/countText"
+        app:layout_constraintTop_toBottomOf="@+id/countText" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="?attr/onBackground"
+        app:layout_constraintEnd_toEndOf="@+id/scoreText"
+        app:layout_constraintStart_toStartOf="@+id/scoreText"
+        app:layout_constraintTop_toBottomOf="@+id/scoreText" />
+
+    <edu.sdsmt.stopthetribblesfinnryan.View.GameAreaView
+        android:id="@+id/gameAreaView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/eat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/score" />
+
+    <Button
+        android:id="@+id/newDay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="2dp"
+        android:background="?attr/primary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/newDay"
+        android:textColor="?attr/onPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/reset"
+        app:layout_constraintEnd_toStartOf="@+id/eat"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/eat"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="?attr/primary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/reset"
+        android:textColor="?attr/onPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/distract"
+        app:layout_constraintEnd_toStartOf="@+id/distract"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/newDay"
+        app:layout_constraintTop_toBottomOf="@+id/newDay" />
+
+    <Button
+        android:id="@+id/eat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="2dp"
+        android:background="?attr/primary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/eat"
+        android:textColor="?attr/onPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/distract"
+        app:layout_constraintEnd_toStartOf="@+id/collect"
+        app:layout_constraintStart_toEndOf="@+id/newDay"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/distract"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/primary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/distract"
+        android:textColor="?attr/onPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/eat"
+        app:layout_constraintStart_toEndOf="@+id/reset"
+        app:layout_constraintTop_toBottomOf="@+id/eat" />
+
+    <Button
+        android:id="@+id/collect"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:background="?attr/primary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/collect"
+        android:textColor="?attr/onPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/distract"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eat"
+        app:layout_constraintTop_toTopOf="@+id/eat" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

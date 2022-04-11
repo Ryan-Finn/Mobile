@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.StopTheTribblesFinnRyan" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="primary">@color/primaryNight</item>
+        <item name="onPrimary">@color/onPrimaryNight</item>
+        <item name="primaryVariant">@color/primaryVariantNight</item>
+        <!-- Secondary brand color. -->
+        <item name="secondary">@color/secondaryNight</item>
+        <item name="onSecondary">@color/onSecondaryNight</item>
+        <item name="secondaryVariant">@color/secondaryVariantNight</item>
+        <!-- Status bar color. -->
+        <item name="statusBarColor" tools:targetApi="l">?attr/primaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="background">@color/backgroundNight</item>
+        <item name="onBackground">@color/onBackgroundNight</item>
+    </style>
+</resources>

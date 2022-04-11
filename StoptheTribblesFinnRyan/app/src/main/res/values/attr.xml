@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary brand color. -->
+    <attr name="primary" format="reference" />
+    <attr name="onPrimary" format="reference" />
+    <attr name="primaryVariant" format="reference" />
+    <!-- Secondary brand color. -->
+    <attr name="secondary" format="reference" />
+    <attr name="onSecondary" format="reference" />
+    <attr name="secondaryVariant" format="reference" />
+    <!-- Status bar color. -->
+    <attr name="statusBarColor" format="reference" />
+    <!-- Customize your theme here. -->
+    <attr name="background" format="reference" />
+    <attr name="onBackground" format="reference" />
+</resources>
