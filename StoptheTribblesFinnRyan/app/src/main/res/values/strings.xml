@@ -12,4 +12,7 @@
     <string name="eat">Eat:\ </string>
     <string name="distract">Distract</string>
     <string name="collect">Collect</string>
+    <string name="gameOver">Game Over</string>
+    <string name="win">You Win!</string>
+    <string name="lose">You Lose :(</string>
 </resources>

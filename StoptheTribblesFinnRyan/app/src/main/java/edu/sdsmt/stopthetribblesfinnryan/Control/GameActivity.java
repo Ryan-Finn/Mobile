@@ -1,9 +1,9 @@
 package edu.sdsmt.stopthetribblesfinnryan.Control;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,9 +15,9 @@ import edu.sdsmt.stopthetribblesfinnryan.View.GameView;
 public class GameActivity extends AppCompatActivity {
     private GameView view;
     private TextView hunger, days, score, tribbles;
-    private Button eat;
-    private int hungerLevel, dayCount, eatCount;
-    private boolean buear;
+    private Button eat, distract;
+    private int hungerLevel, dayCount, eatCount, scoreCount, tribbleCount;
+    private boolean bureau;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,66 +29,88 @@ public class GameActivity extends AppCompatActivity {
         days = findViewById(R.id.days);
         score = findViewById(R.id.score);
         tribbles = findViewById(R.id.count);
+
         eat = findViewById(R.id.eat);
+        distract = findViewById(R.id.distract);
 
         init();
     }
 
     private void init() {
+        bureau = false;
         hungerLevel = 0;
+        dayCount = 1;
+        scoreCount = 0;
+        tribbleCount = 100;
+        eatCount = 3;
+        updateGUI();
+    }
+
+    public void updateGUI() {
+        if (hungerLevel < 0)
+                hungerLevel = 0;
+        else if (hungerLevel > 10)
+                hungerLevel = 10;
         String text = getString(R.string.hunger) + hungerLevel;
         hunger.setText(text);
 
-        dayCount = 1;
         text = getString(R.string.days) + dayCount;
         days.setText(text);
 
-        score.setText("0");
-        tribbles.setText("100");
-
-        eatCount = 3;
-        text = getString(R.string.eat) + eatCount;
-        eat.setText(text);
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    public void updateGUI() {
-        String text = getString(R.string.hunger) + hungerLevel;
-        hunger.setText(text);
+        score.setText("" + scoreCount);
+        tribbles.setText("" + tribbleCount);
 
         eat.setEnabled(eatCount != 0);
         text = getString(R.string.eat) + eatCount;
         eat.setText(text);
 
+        distract.setEnabled(bureau);
+
         view.invalidate();
+        
+        isEndGame();
     }
 
     public void newDay(View v) {
-        String text = getString(R.string.days) + (++dayCount);
-        days.setText(text);
+        ++dayCount;
         eatCount = 3;
+        if (dayCount % 2 == 0)
+            bureau = true;
         view.newDay();
         updateGUI();
     }
 
     public void reset(View v) {
-        init();
         view.reset();
-        updateGUI();
+        init();
     }
 
     public void eat(View v) {
-        if (eatCount > 0)
-            --eatCount;
+        --eatCount;
+        hungerLevel -= 3;
         updateGUI();
     }
 
     public void distract(View v) {
         hungerLevel = 10;
+        bureau = false;
+        updateGUI();
     }
 
     public void collect(View v) {
-
+        hungerLevel += 2;
+        updateGUI();
+    }
+    
+    private void isEndGame() {
+        if (tribbleCount >= 200 || tribbleCount <= 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+            builder.setTitle(R.string.gameOver);
+            builder.setMessage(R.string.win);
+            builder.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss());
+            builder.show();
+            finish();
+        }
     }
 
     @Override
