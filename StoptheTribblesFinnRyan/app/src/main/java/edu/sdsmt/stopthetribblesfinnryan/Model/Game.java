@@ -14,7 +14,7 @@ public class Game {
     }
 
     public void newDay() {
-        int newCount = (int)Math.ceil(tribbles.size() * 1.25);
+        int newCount = (int)Math.ceil(tribbles.size() * 0.25);
         for (int i = 0; i < newCount; i++)
             tribbles.add(new Tribble(context, tribbles.size() + i, 0.1f));
     }

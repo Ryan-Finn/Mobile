@@ -16,7 +16,7 @@ public class GameActivity extends AppCompatActivity {
     private GameView view;
     private TextView hunger, days, score, tribbles;
     private Button eat, distract;
-    private int hungerLevel, dayCount, eatCount, scoreCount, tribbleCount;
+    private int hungerLevel, dayCount, eatCount, scoreCount, tribbleCount, lastBureau;
     private boolean bureau;
 
     @Override
@@ -38,6 +38,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void init() {
         bureau = false;
+        lastBureau = 0;
         hungerLevel = 0;
         dayCount = 1;
         scoreCount = 0;
@@ -47,6 +48,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void updateGUI() {
+        tribbleCount = view.getTribbleCount();
+
         if (hungerLevel < 0)
                 hungerLevel = 0;
         else if (hungerLevel > 10)
@@ -57,8 +60,11 @@ public class GameActivity extends AppCompatActivity {
         text = getString(R.string.days) + dayCount;
         days.setText(text);
 
-        score.setText("" + scoreCount);
-        tribbles.setText("" + tribbleCount);
+        text = "" + scoreCount;
+        score.setText(text);
+
+        text = "" + tribbleCount;
+        tribbles.setText(text);
 
         eat.setEnabled(eatCount != 0);
         text = getString(R.string.eat) + eatCount;
@@ -74,7 +80,7 @@ public class GameActivity extends AppCompatActivity {
     public void newDay(View v) {
         ++dayCount;
         eatCount = 3;
-        if (dayCount % 2 == 0)
+        if ((dayCount - lastBureau) % 2 == 0)
             bureau = true;
         view.newDay();
         updateGUI();
@@ -88,17 +94,20 @@ public class GameActivity extends AppCompatActivity {
     public void eat(View v) {
         --eatCount;
         hungerLevel -= 3;
+        view.eat();
         updateGUI();
     }
 
     public void distract(View v) {
         hungerLevel = 10;
         bureau = false;
+        lastBureau = dayCount;
         updateGUI();
     }
 
     public void collect(View v) {
         hungerLevel += 2;
+        ++scoreCount;
         updateGUI();
     }
     
@@ -106,10 +115,21 @@ public class GameActivity extends AppCompatActivity {
         if (tribbleCount >= 200 || tribbleCount <= 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
             builder.setTitle(R.string.gameOver);
-            builder.setMessage(R.string.win);
-            builder.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss());
+
+            if (tribbleCount <= 0)
+                builder.setMessage(R.string.win);
+            else
+                builder.setMessage(R.string.lose);
+
+            builder.setPositiveButton(R.string.again, (dialog, which) -> {
+                dialog.dismiss();
+                reset(view);
+            });
+            builder.setNegativeButton(R.string.quit, (dialog, which) -> {
+                dialog.dismiss();
+                finish();
+            });
             builder.show();
-            finish();
         }
     }
 

@@ -85,6 +85,10 @@ public class GameView extends View {
         area.eat();
     }
 
+    public int getTribbleCount() {
+        return area.getTribbles().size();
+    }
+
     @Override
     @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent event) {
