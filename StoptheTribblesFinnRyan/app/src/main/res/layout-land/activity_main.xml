@@ -92,7 +92,7 @@
         app:layout_constraintTop_toBottomOf="@+id/scoreText" />
 
     <edu.sdsmt.stopthetribblesfinnryan.View.GameView
-        android:id="@+id/gameAreaView"
+        android:id="@+id/GameArea"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -122,7 +122,7 @@
         app:layout_constraintEnd_toStartOf="@+id/reset"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameAreaView" />
+        app:layout_constraintTop_toBottomOf="@+id/GameArea" />
 
     <Button
         android:id="@+id/reset"
@@ -173,7 +173,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/collect"
-        app:layout_constraintTop_toTopOf="@+id/gameAreaView"
+        app:layout_constraintTop_toTopOf="@+id/GameArea"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintVertical_weight="1" />
 
@@ -189,7 +189,7 @@
         android:insetBottom="0dp"
         android:text="@string/collect"
         android:textColor="?attr/onPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/gameAreaView"
+        app:layout_constraintBottom_toBottomOf="@+id/GameArea"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/distract"

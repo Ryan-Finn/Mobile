@@ -91,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/scoreText" />
 
     <edu.sdsmt.stopthetribblesfinnryan.View.GameView
-        android:id="@+id/gameAreaView"
+        android:id="@+id/GameArea"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"

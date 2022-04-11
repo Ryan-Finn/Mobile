@@ -11,11 +11,15 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.Random;
+
 import edu.sdsmt.stopthetribblesfinnryan.Model.Game;
+import edu.sdsmt.stopthetribblesfinnryan.Model.Tribble;
 import edu.sdsmt.stopthetribblesfinnryan.R;
 
 public class GameView extends View {
     private Game area;
+    private static final Random random = new Random();
     private final Touch touch1 = new Touch();
     private final Touch touch2 = new Touch();
     private Paint fillPaint;
@@ -39,6 +43,7 @@ public class GameView extends View {
     private void init(Context context) {
         TypedValue typedValue = new TypedValue();
         Resources.Theme theme = context.getTheme();
+        area = new Game(getContext());
 
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         fillPaint.setColor(Color.LTGRAY);
@@ -58,6 +63,12 @@ public class GameView extends View {
 
         canvas.drawRect(0, 0, getWidth(), getHeight(), fillPaint);
         canvas.drawRect(0, 0, getWidth(), getHeight(), outlinePaint);
+
+        for(Tribble tribble : area.getTribbles()) {
+            tribble.shuffle(getWidth(), getHeight(), 0, 0, random);
+            tribble.setShuffle(false);
+            tribble.draw(canvas, getWidth(), getHeight(), 0, 0);
+        }
 
         canvas.restore();
     }
