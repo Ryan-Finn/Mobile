@@ -17,6 +17,12 @@ public class GameActivity extends AppCompatActivity {
     private TextView hunger, days, score, tribbles;
     private Button eat, distract;
     private int hungerLevel, dayCount, eatCount, scoreCount, tribbleCount, lastBureau;
+    public static final String h = "game.hunger";
+    public static final String d = "game.days";
+    public static final String e = "game.eat";
+    public static final String s = "game.score";
+    public static final String l = "game.last";
+    public static final String b = "game.bureau";
     private boolean bureau;
 
     @Override
@@ -34,6 +40,36 @@ public class GameActivity extends AppCompatActivity {
         distract = findViewById(R.id.distract);
 
         init();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle bundle) {
+        super.onSaveInstanceState(bundle);
+
+        view.saveInstanceState(bundle);
+
+        bundle.putInt(h, hungerLevel);
+        bundle.putInt(d, dayCount);
+        bundle.putInt(e, eatCount);
+        bundle.putInt(s, scoreCount);
+        bundle.putInt(l, lastBureau);
+        bundle.putBoolean(b, bureau);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle bundle) {
+        super.onRestoreInstanceState(bundle);
+
+        view.restoreInstanceState(bundle);
+
+        hungerLevel = bundle.getInt(h);
+        dayCount = bundle.getInt(d);
+        eatCount = bundle.getInt(e);
+        scoreCount = bundle.getInt(s);
+        lastBureau = bundle.getInt(l);
+        bureau = bundle.getBoolean(b);
+
+        updateGUI();
     }
 
     private void init() {
@@ -131,18 +167,5 @@ public class GameActivity extends AppCompatActivity {
             });
             builder.show();
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle bundle) {
-        super.onSaveInstanceState(bundle);
-        //view.saveInstanceState(bundle);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle bundle) {
-        super.onRestoreInstanceState(bundle);
-        //view.loadInstanceState(bundle);
-        updateGUI();
     }
 }

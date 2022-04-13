@@ -1,6 +1,9 @@
 package edu.sdsmt.stopthetribblesfinnryan.Model;
 
 import android.content.Context;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -28,6 +31,16 @@ public class Game {
     public void eat() {
         for (int i = 0; i < 10; i++)
             tribbles.add(new Tribble(context, tribbles.size() + i, 0.1f));
+    }
+
+    public void saveInstanceState(@NonNull Bundle bundle) {
+        for(Tribble tribble : tribbles)
+            tribble.saveInstanceState(bundle);
+    }
+
+    public void restoreInstanceState(@NonNull Bundle bundle) {
+        for(Tribble tribble : tribbles)
+            tribble.restoreInstanceState(bundle);
     }
 
     public ArrayList<Tribble> getTribbles() {

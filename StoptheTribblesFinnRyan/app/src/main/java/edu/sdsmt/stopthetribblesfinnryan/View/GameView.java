@@ -6,10 +6,13 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import java.util.Random;
 
@@ -43,7 +46,6 @@ public class GameView extends View {
     public void init(Context context) {
         TypedValue typedValue = new TypedValue();
         Resources.Theme theme = context.getTheme();
-        area = new Game(context);
 
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         fillPaint.setColor(Color.LTGRAY);
@@ -53,6 +55,10 @@ public class GameView extends View {
         outlinePaint.setStrokeWidth(5.0f);
         theme.resolveAttribute(R.attr.primary, typedValue, true);
         outlinePaint.setColor(typedValue.data);
+
+        area = new Game(context);
+        for(Tribble tribble : area.getTribbles())
+            tribble.shuffle(getWidth(), getHeight(), 0, 0, random);
     }
 
     @Override
@@ -64,11 +70,8 @@ public class GameView extends View {
         canvas.drawRect(0, 0, getWidth(), getHeight(), fillPaint);
         canvas.drawRect(0, 0, getWidth(), getHeight(), outlinePaint);
 
-        for(Tribble tribble : area.getTribbles()) {
-            tribble.shuffle(getWidth(), getHeight(), 0, 0, random);
-            tribble.setShuffle(false);
-            tribble.draw(canvas, getWidth(), getHeight(), 0, 0);
-        }
+        //for(Tribble tribble : area.getTribbles())
+        //    tribble.draw(canvas, getWidth(), getHeight(), 0, 0);
 
         canvas.restore();
     }
@@ -136,5 +139,13 @@ public class GameView extends View {
             dY = touch.dY;
             touch.clear();
         }
+    }
+
+    public void saveInstanceState(@NonNull Bundle bundle) {
+        area.saveInstanceState(bundle);
+    }
+
+    public void restoreInstanceState(@NonNull Bundle bundle) {
+        area.restoreInstanceState(bundle);
     }
 }

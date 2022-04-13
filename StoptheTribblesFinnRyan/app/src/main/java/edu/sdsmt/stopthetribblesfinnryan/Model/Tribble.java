@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 
 import java.util.Random;
 
@@ -19,7 +22,6 @@ public class Tribble {
     private final int width;
     private final int height;
     private final float scale;
-    private boolean doShuffle = true;
 
     public Tribble(Context context, int id, float scale) {
         this.id = id;
@@ -47,9 +49,6 @@ public class Tribble {
     }
 
     public void shuffle(float canvas_width, float canvas_height, float canvasX, float canvasY, Random rand) {
-        if (!doShuffle)
-            return;
-
         relX = rand.nextFloat();
         relY = rand.nextFloat();
 
@@ -69,6 +68,20 @@ public class Tribble {
             relY = rand.nextFloat();
             y = canvasY + relY * canvas_height;
         }
+    }
+
+    public void saveInstanceState(@NonNull Bundle bundle) {
+        bundle.putFloat("tribble." + id + ".x", x);
+        bundle.putFloat("tribble." + id + ".y", y);
+        bundle.putFloat("tribble." + id + ".relX", relX);
+        bundle.putFloat("tribble." + id + ".relY", relY);
+    }
+
+    public void restoreInstanceState(@NonNull Bundle bundle) {
+        x = bundle.getFloat("tribble." + id + ".x");
+        y = bundle.getFloat("tribble." + id + ".y");
+        relX = bundle.getFloat("tribble." + id + ".relX");
+        relY = bundle.getFloat("tribble." + id + ".relY");
     }
 
     public float getRelX() {
@@ -108,8 +121,4 @@ public class Tribble {
     public void setY(float y) {
         this.y = y;
     }
-
-    public void setShuffle(boolean bool) { this.doShuffle = bool; }
-
-    public boolean getShuffle() { return this.doShuffle; }
 }
