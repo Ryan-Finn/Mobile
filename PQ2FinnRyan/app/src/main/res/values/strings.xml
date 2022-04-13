@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">PQ2</string>
+    <string name="zero">0</string>
+    <string name="addA">Add A</string>
+    <string name="addBC">Add BC</string>
+    <string name="subAC">Sub AC</string>
+    <string name="reset">Reset</string>
+    <string name="load">Load</string>
+    <string name="save">Save</string>
+    <string name="a">A</string>
+    <string name="b">B</string>
+    <string name="c">C</string>
+    <string name="on_save_total">Save Total Tap</string>
+    <string name="load_one">Load One</string>
+</resources>

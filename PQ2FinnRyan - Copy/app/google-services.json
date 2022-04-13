@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "542870052941",
+    "project_id": "pq2finnryan",
+    "storage_bucket": "pq2finnryan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542870052941:android:452d58a057431fdcf37c04",
+        "android_client_info": {
+          "package_name": "edu.sdsmt.pq2finnryan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542870052941-r6sc7l9v8pbjcjpl666hhii91amgvovt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNv3Qnc46x5UJTt7kMN4gV3W2A1q9tJ4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542870052941-r6sc7l9v8pbjcjpl666hhii91amgvovt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
