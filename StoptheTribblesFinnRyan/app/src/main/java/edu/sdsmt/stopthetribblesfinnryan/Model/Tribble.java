@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -14,26 +15,28 @@ import edu.sdsmt.stopthetribblesfinnryan.R;
 
 public class Tribble {
     private final Bitmap bitmap;
-    private float relX = -1;
-    private float relY = -1;
-    private float x = -1;
-    private float y = -1;
     private final int id;
     private final int width;
     private final int height;
-    private final float scale;
+    private static final float scale = 0.2f;
+    private float x, y, relX, relY;
 
-    public Tribble(Context context, int id, float scale) {
+    public Tribble(Context context, int id, Random rand) {
+        this.relX = rand.nextFloat();
+        this.relY = rand.nextFloat();
         this.id = id;
-        this.scale = scale;
-        this.bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.tribble);
+        this.bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.tribble);
         this.width = bitmap.getWidth();
         this.height = bitmap.getHeight();
     }
 
     public void draw(Canvas canvas, float canvas_width, float canvas_height, float canvasX, float canvasY) {
-        x = canvasX + relX * canvas_width;
-        y = canvasY + relY * canvas_height;
+        x = canvasX + width * scale;
+        y = canvasY + height * scale;
+
+        x += relX * (canvas_width - 2 * width * scale);
+        y += relY * (canvas_height - 2 * height * scale);
+
         float window_aspect = canvas.getWidth() / (float) canvas.getHeight();
         float canvas_aspect = canvas_width / canvas_height;
         float second_scale = scale * canvas_aspect / window_aspect;
@@ -48,28 +51,6 @@ public class Tribble {
         canvas.restore();
     }
 
-    public void shuffle(float canvas_width, float canvas_height, float canvasX, float canvasY, Random rand) {
-        relX = rand.nextFloat();
-        relY = rand.nextFloat();
-
-        x = canvasX + relX * canvas_width;
-        y = canvasY + relY * canvas_height;
-
-        double minX = canvasX + width * scale / 2.0;
-        double maxX = canvasX + canvas_width - width * scale / 2.0;
-        double minY = canvasY + height * scale / 2.0;
-        double maxY = canvasY + canvas_height - height * scale / 2.0;
-
-        while (maxX <= x || x <= minX) {
-            relX = rand.nextFloat();
-            x = canvasX + relX * canvas_width;
-        }
-        while (maxY <= y || y <= minY) {
-            relY = rand.nextFloat();
-            y = canvasY + relY * canvas_height;
-        }
-    }
-
     public void saveInstanceState(@NonNull Bundle bundle) {
         bundle.putFloat("tribble." + id + ".x", x);
         bundle.putFloat("tribble." + id + ".y", y);
@@ -82,43 +63,5 @@ public class Tribble {
         y = bundle.getFloat("tribble." + id + ".y");
         relX = bundle.getFloat("tribble." + id + ".relX");
         relY = bundle.getFloat("tribble." + id + ".relY");
-    }
-
-    public float getRelX() {
-        return relX;
-    }
-
-    public float getRelY() {
-        return relY;
-    }
-
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public float getRadius() {return (float) this.width * scale / 2;}
-
-    public void setRelX(float x) {
-        this.relX = x;
-    }
-
-    public void setRelY(float y) {
-        this.relY = y;
-    }
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public void setY(float y) {
-        this.y = y;
     }
 }
