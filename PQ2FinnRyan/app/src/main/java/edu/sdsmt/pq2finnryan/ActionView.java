@@ -154,11 +154,6 @@ public class ActionView extends View {
             y = newY;
         }
 
-        public void computeDeltas() {
-            dX = x - lastX;
-            dY = y - lastY;
-        }
-
         public void clear() {
             id = -1;
             x = 0;

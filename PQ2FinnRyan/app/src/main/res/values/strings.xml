@@ -12,4 +12,6 @@
     <string name="c">C</string>
     <string name="on_save_total">Save Total Tap</string>
     <string name="load_one">Load One</string>
+    <string name="loadDlg">Database Contents</string>
+    <string name="loadOneDlg">Database ONE Contents</string>
 </resources>
