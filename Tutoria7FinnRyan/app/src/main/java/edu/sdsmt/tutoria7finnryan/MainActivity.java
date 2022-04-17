@@ -2,9 +2,13 @@ package edu.sdsmt.tutoria7finnryan;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -25,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean valid = false;
     private double toLatitude, toLongitude;
     private String to;
-    private TextView viewTo, viewLatitude, viewLongitude, viewDistance;
+    private TextView viewTo, viewLatitude, viewLongitude, viewDistance, viewProvider;
     private Location locStart, locEnd;
+    private static final int NEED_PERMISSIONS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         viewLatitude = findViewById(R.id.textLatitude);
         viewLongitude = findViewById(R.id.textLongitude);
         viewDistance = findViewById(R.id.textDistance);
+        viewProvider = findViewById(R.id.textProvider);
     }
 
     @Override
@@ -86,6 +92,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void registerListeners() {
         unregisterListeners();
+
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setPowerRequirement(Criteria.POWER_HIGH);
+        criteria.setAltitudeRequired(true);
+        criteria.setBearingRequired(false);
+        criteria.setSpeedRequired(false);
+        criteria.setCostAllowed(false);
+
+        String bestAvailable = locationManager.getBestProvider(criteria, true);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            if (bestAvailable != null) {
+                locationManager.requestLocationUpdates(bestAvailable, 500, 1, activeListener);
+                viewProvider.setText(bestAvailable);
+            }
+        else
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, NEED_PERMISSIONS);
+
 
     }
 
