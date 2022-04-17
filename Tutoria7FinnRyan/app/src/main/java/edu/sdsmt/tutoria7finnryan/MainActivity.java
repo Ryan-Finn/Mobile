@@ -1,9 +1,11 @@
 package edu.sdsmt.tutoria7finnryan;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private ActiveListener activeListener = new ActiveListener();
     private LocationManager locationManager;
     private SharedPreferences settings;
     private final static String TO = "to";
@@ -73,6 +76,23 @@ public class MainActivity extends AppCompatActivity {
             locStart.setLatitude(latitude);
             locStart.setLongitude(longitude);
             viewDistance.setText(String.format(Locale.getDefault(),"%1$6.1fm", locStart.distanceTo(locEnd)));
+        }
+    }
+
+    private class ActiveListener implements LocationListener {
+        @Override
+        public void onLocationChanged(@NonNull Location location) {
+
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            LocationListener.super.onStatusChanged(provider, status, extras);
+        }
+
+        @Override
+        public void onProviderDisabled(@NonNull String provider) {
+            LocationListener.super.onProviderDisabled(provider);
         }
     }
 }
