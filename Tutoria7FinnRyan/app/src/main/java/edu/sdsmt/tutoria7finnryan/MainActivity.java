@@ -78,17 +78,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == NEED_PERMISSIONS) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                // permission was granted, yay! Try registering again
+        if (requestCode == NEED_PERMISSIONS)
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                 registerListeners();
-            } else {
-
-                // permission denied, boo! Tell the users the app won't work now
+            else
                 Toast.makeText(getApplicationContext(), R.string.denied, Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     private void setUI() {
@@ -120,8 +114,7 @@ public class MainActivity extends AppCompatActivity {
             if (bestAvailable != null) {
                 locationManager.requestLocationUpdates(bestAvailable, 500, 1, activeListener);
                 viewProvider.setText(bestAvailable);
-                Location location = locationManager.getLastKnownLocation(bestAvailable);
-                onLocation(location);
+                onLocation(locationManager.getLastKnownLocation(bestAvailable));
             }
         else
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, NEED_PERMISSIONS);
@@ -148,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
     private class ActiveListener implements LocationListener {
         @Override
         public void onLocationChanged(@NonNull Location location) {
-
+            onLocation(location);
         }
 
         @Override
@@ -158,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onProviderDisabled(@NonNull String provider) {
+            registerListeners();
             LocationListener.super.onProviderDisabled(provider);
         }
     }
