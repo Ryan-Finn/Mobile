@@ -3,6 +3,7 @@ package edu.sdsmt.tutoria7finnryan;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         to = settings.getString(TO, "McLaury Building");
         toLatitude = Double.parseDouble(settings.getString(TOLAT, "44.075104"));
@@ -56,10 +59,12 @@ public class MainActivity extends AppCompatActivity {
         viewProvider.setText("");
 
         setUI();
+        registerListeners();
     }
 
     @Override
     protected void onStop() {
+        unregisterListeners();
         super.onStop();
     }
 
@@ -77,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
             locStart.setLongitude(longitude);
             viewDistance.setText(String.format(Locale.getDefault(),"%1$6.1fm", locStart.distanceTo(locEnd)));
         }
+    }
+
+    private void registerListeners() {
+
+    }
+
+    private void unregisterListeners() {
+
     }
 
     private class ActiveListener implements LocationListener {
