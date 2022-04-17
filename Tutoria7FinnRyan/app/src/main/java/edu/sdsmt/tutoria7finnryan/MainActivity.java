@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == NEED_PERMISSIONS) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -100,9 +100,6 @@ public class MainActivity extends AppCompatActivity {
         if (valid) {
             viewLatitude.setText(String.format(Locale.getDefault(),"%1$6.7fm", (float)latitude));
             viewLongitude.setText(String.format(Locale.getDefault(),"%1$6.7fm", (float)longitude));
-
-            locStart.setLatitude(latitude);
-            locStart.setLongitude(longitude);
             viewDistance.setText(String.format(Locale.getDefault(),"%1$6.1fm", locStart.distanceTo(locEnd)));
         }
     }
@@ -123,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
             if (bestAvailable != null) {
                 locationManager.requestLocationUpdates(bestAvailable, 500, 1, activeListener);
                 viewProvider.setText(bestAvailable);
+                Location location = locationManager.getLastKnownLocation(bestAvailable);
+                onLocation(location);
             }
         else
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, NEED_PERMISSIONS);
@@ -132,6 +131,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void unregisterListeners() {
         locationManager.removeUpdates(activeListener);
+    }
+
+    private void onLocation(Location location) {
+        if (location == null)
+            return;
+
+        valid = true;
+        locStart = location;
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
+
+        setUI();
     }
 
     private class ActiveListener implements LocationListener {
