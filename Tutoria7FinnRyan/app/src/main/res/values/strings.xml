@@ -7,5 +7,8 @@
     <string name="textNewLocLabel">New Location</string>
     <string name="editLocation">Address or location</string>
     <string name="buttonNewLocation">New</string>
-    <string name="denied">"Permission Denied. Distance finding will not work!"</string>
+    <string name="denied">Permission Denied. Distance finding will not work!</string>
+    <string name="mclaury">McLaury Building</string>
+    <string name="grubby">Grubby</string>
+    <string name="home">Home</string>
 </resources>

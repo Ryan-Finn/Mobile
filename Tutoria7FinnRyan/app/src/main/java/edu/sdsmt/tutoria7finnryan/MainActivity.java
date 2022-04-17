@@ -14,6 +14,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +62,34 @@ public class MainActivity extends AppCompatActivity {
         viewLongitude = findViewById(R.id.textLongitude);
         viewDistance = findViewById(R.id.textDistance);
         viewProvider = findViewById(R.id.textProvider);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.itemGrubby:
+                newTo(getString(R.string.grubby), 44.074834, -103.207562);
+                return true;
+
+            case R.id.itemHome:
+                newTo(getString(R.string.grubby), 44.0765266, -103.2101517);
+                return true;
+
+            case R.id.itemMcLaury:
+                newTo(getString(R.string.mclaury), 44.075104, -103.206819);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -141,6 +172,22 @@ public class MainActivity extends AppCompatActivity {
         setUI();
     }
 
+    private void newTo(String address, double lat, double lon) {
+        to = address;
+        toLatitude = lat;
+        toLongitude = lon;
+        locEnd.setLatitude(lat);
+        locEnd.setLongitude(lon);
+
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(TO, address);
+        editor.putString(TOLAT, "" + lat);
+        editor.putString(TOLONG, "" + lon);
+        editor.apply();
+
+        setUI();
+    }
+
     private class ActiveListener implements LocationListener {
         @Override
         public void onLocationChanged(@NonNull Location location) {
@@ -155,7 +202,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onProviderDisabled(@NonNull String provider) {
             registerListeners();
-            LocationListener.super.onProviderDisabled(provider);
         }
     }
 }
