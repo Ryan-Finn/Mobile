@@ -11,4 +11,6 @@
     <string name="mclaury">McLaury Building</string>
     <string name="grubby">Grubby</string>
     <string name="home">Home</string>
+    <string name="exception">Failed to communicate with geolocation services</string>
+    <string name="couldnotfind">Unable to locate address</string>
 </resources>

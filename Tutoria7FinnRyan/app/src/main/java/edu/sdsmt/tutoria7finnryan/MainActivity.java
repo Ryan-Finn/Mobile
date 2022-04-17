@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -30,7 +31,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private ActiveListener activeListener = new ActiveListener();
+    private final ActiveListener activeListener = new ActiveListener();
     private LocationManager locationManager;
     private SharedPreferences settings;
     private final static String TO = "to";
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.itemHome:
-                newTo(getString(R.string.grubby), 44.0765266, -103.2101517);
+                newTo(getString(R.string.home), 44.0765266, -103.2101517);
                 return true;
 
             case R.id.itemMcLaury:
@@ -118,11 +120,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == NEED_PERMISSIONS)
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                registerListeners();
-            else
-                Toast.makeText(getApplicationContext(), R.string.denied, Toast.LENGTH_SHORT).show();
+        if (requestCode != NEED_PERMISSIONS)
+            return;
+
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            registerListeners();
+            return;
+        }
+
+        Toast.makeText(getApplicationContext(), R.string.denied, Toast.LENGTH_SHORT).show();
     }
 
     private void setUI() {
@@ -131,11 +137,12 @@ public class MainActivity extends AppCompatActivity {
         viewLongitude.setText("");
         viewDistance.setText("");
 
-        if (valid) {
-            viewLatitude.setText(String.format(Locale.getDefault(),"%1$6.7fm", (float)latitude));
-            viewLongitude.setText(String.format(Locale.getDefault(),"%1$6.7fm", (float)longitude));
-            viewDistance.setText(String.format(Locale.getDefault(),"%1$6.1fm", locStart.distanceTo(locEnd)));
-        }
+        if (!valid)
+            return;
+
+        viewLatitude.setText(String.format(Locale.getDefault(),"%1$6.7fm", (float)latitude));
+        viewLongitude.setText(String.format(Locale.getDefault(),"%1$6.7fm", (float)longitude));
+        viewDistance.setText(String.format(Locale.getDefault(),"%1$6.1fm", locStart.distanceTo(locEnd)));
     }
 
     private void registerListeners() {
@@ -150,16 +157,17 @@ public class MainActivity extends AppCompatActivity {
         criteria.setCostAllowed(false);
 
         String bestAvailable = locationManager.getBestProvider(criteria, true);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            if (bestAvailable != null) {
-                locationManager.requestLocationUpdates(bestAvailable, 500, 1, activeListener);
-                viewProvider.setText(bestAvailable);
-                onLocation(locationManager.getLastKnownLocation(bestAvailable));
-            }
-        else
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, NEED_PERMISSIONS);
+            return;
+        }
 
+        if (bestAvailable == null)
+            return;
 
+        locationManager.requestLocationUpdates(bestAvailable, 500, 1, activeListener);
+        viewProvider.setText(bestAvailable);
+        onLocation(locationManager.getLastKnownLocation(bestAvailable));
     }
 
     private void unregisterListeners() {
@@ -201,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void newAddress(final String address) {
-        if(address.equals(""))
+        if (address.equals(""))
             return;
 
         new Thread(() -> lookupAddress(address)).start();
@@ -214,10 +222,32 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             locations = geocoder.getFromLocationName(address, 1);
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             locations = null;
             exception = true;
         }
+
+        boolean finalException = exception;
+        List<Address> finalLocations = locations;
+        this.runOnUiThread(() -> newLocation(address, finalException, finalLocations));
+    }
+
+    private void newLocation(String address, boolean exception, List<Address> locations) {
+        if (exception) {
+            Toast.makeText(MainActivity.this, R.string.exception, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (locations == null || locations.size() == 0) {
+            Toast.makeText(this, R.string.couldnotfind, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        EditText location = findViewById(R.id.editLocation);
+        location.setText("");
+
+        Address a = locations.get(0);
+        newTo(address, a.getLatitude(), a.getLongitude());
     }
 
     private class ActiveListener implements LocationListener {
