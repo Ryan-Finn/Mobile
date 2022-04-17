@@ -8,7 +8,9 @@ import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -23,6 +25,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -196,11 +200,24 @@ public class MainActivity extends AppCompatActivity {
         newAddress(address);
     }
 
-    private void newAddress(String address) {
+    private void newAddress(final String address) {
         if(address.equals(""))
             return;
 
+        new Thread(() -> lookupAddress(address)).start();
+    }
 
+    private void lookupAddress(String address) {
+        Geocoder geocoder = new Geocoder(MainActivity.this, Locale.US);
+        boolean exception = false;
+        List<Address> locations;
+
+        try {
+            locations = geocoder.getFromLocationName(address, 1);
+        } catch(IOException ex) {
+            locations = null;
+            exception = true;
+        }
     }
 
     private class ActiveListener implements LocationListener {
