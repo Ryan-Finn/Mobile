@@ -17,7 +17,9 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -186,6 +188,19 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
 
         setUI();
+    }
+
+    public void onNew(View view) {
+        EditText location = findViewById(R.id.editLocation);
+        final String address = location.getText().toString().trim();
+        newAddress(address);
+    }
+
+    private void newAddress(String address) {
+        if(address.equals(""))
+            return;
+
+
     }
 
     private class ActiveListener implements LocationListener {
