@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -72,6 +73,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         unregisterListeners();
         super.onStop();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == NEED_PERMISSIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                // permission was granted, yay! Try registering again
+                registerListeners();
+            } else {
+
+                // permission denied, boo! Tell the users the app won't work now
+                Toast.makeText(getApplicationContext(), R.string.denied, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void setUI() {
