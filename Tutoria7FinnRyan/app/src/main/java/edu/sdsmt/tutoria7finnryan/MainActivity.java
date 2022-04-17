@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.itemHome:
-                newTo(getString(R.string.home), 44.0765266, -103.2101517);
+                newTo(getString(R.string.home), 38.928325398654174, -104.70940438833615);
                 return true;
 
             case R.id.itemMcLaury:
