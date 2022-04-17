@@ -85,11 +85,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void registerListeners() {
+        unregisterListeners();
 
     }
 
     private void unregisterListeners() {
-
+        locationManager.removeUpdates(activeListener);
     }
 
     private class ActiveListener implements LocationListener {
