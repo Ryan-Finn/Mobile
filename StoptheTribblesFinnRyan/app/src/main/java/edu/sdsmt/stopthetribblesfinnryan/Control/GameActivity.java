@@ -84,7 +84,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        view = this.findViewById(R.id.GameArea);
+        view = this.findViewById(R.id.gameView);
 
         hunger = findViewById(R.id.hungerCnt);
         days = findViewById(R.id.daysCnt);

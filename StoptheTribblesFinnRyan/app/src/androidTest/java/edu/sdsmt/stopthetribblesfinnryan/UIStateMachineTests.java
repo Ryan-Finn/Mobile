@@ -19,8 +19,8 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 
 import edu.sdsmt.stopthetribblesfinnryan.Control.GameActivity;
+import edu.sdsmt.stopthetribblesfinnryan.Control.StateMachine;
 import edu.sdsmt.stopthetribblesfinnryan.Model.Game;
-import edu.sdsmt.stopthetribblesfinnryan.View.GameView;
 import edu.sdsmt.stopthetribblesfinnryan.States.HighHungerNoBureaucrat;
 import edu.sdsmt.stopthetribblesfinnryan.States.HighHungerWithBureaucrat;
 import edu.sdsmt.stopthetribblesfinnryan.States.LowHungerNoBureaucrat;

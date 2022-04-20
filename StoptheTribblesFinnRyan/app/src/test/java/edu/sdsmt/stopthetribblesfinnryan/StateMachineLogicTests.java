@@ -12,14 +12,15 @@ import org.mockito.Mockito;
 
 import java.util.Random;
 
-import edu.sdsmt.rebenitsch.stopthetriblles.States.HighHungerNoBureaucrat;
-import edu.sdsmt.rebenitsch.stopthetriblles.States.HighHungerWithBureaucrat;
-import edu.sdsmt.rebenitsch.stopthetriblles.States.LowHungerNoBureaucrat;
-import edu.sdsmt.rebenitsch.stopthetriblles.States.LowHungerWithBureaucrat;
-import edu.sdsmt.rebenitsch.stopthetriblles.States.MidHungerNoBureaucrat;
-import edu.sdsmt.rebenitsch.stopthetriblles.States.MidHungerWithBureaucrat;
 import edu.sdsmt.stopthetribblesfinnryan.Control.GameActivity;
+import edu.sdsmt.stopthetribblesfinnryan.Control.StateMachine;
 import edu.sdsmt.stopthetribblesfinnryan.Model.Game;
+import edu.sdsmt.stopthetribblesfinnryan.States.HighHungerNoBureaucrat;
+import edu.sdsmt.stopthetribblesfinnryan.States.HighHungerWithBureaucrat;
+import edu.sdsmt.stopthetribblesfinnryan.States.LowHungerNoBureaucrat;
+import edu.sdsmt.stopthetribblesfinnryan.States.LowHungerWithBureaucrat;
+import edu.sdsmt.stopthetribblesfinnryan.States.MidHungerNoBureaucrat;
+import edu.sdsmt.stopthetribblesfinnryan.States.MidHungerWithBureaucrat;
 import edu.sdsmt.stopthetribblesfinnryan.View.GameView;
 
 public class StateMachineLogicTests {
