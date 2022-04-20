@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -49,6 +48,22 @@ public class Tribble {
         canvas.drawBitmap(bitmap, 0, 0, null);
 
         canvas.restore();
+    }
+
+    public void wiggle(float rand) {
+        double ang = 2 * rand * Math.PI;
+        float moveX = 0.001f * (float)Math.cos(ang);
+        float moveY = 0.001f * (float)Math.sin(ang);
+
+        if (relX + moveX < 0 || relX + moveX > 1)
+            relX -= moveX;
+        else
+            relX += moveX;
+
+        if (relY + moveY < 0 || relY + moveY > 1)
+            relY -= moveY;
+        else
+            relY += moveY;
     }
 
     public void saveInstanceState(@NonNull Bundle bundle) {

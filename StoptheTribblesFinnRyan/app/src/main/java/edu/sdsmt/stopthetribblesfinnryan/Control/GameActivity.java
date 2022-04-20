@@ -1,3 +1,58 @@
+/*
+____ * Grading tags completed
+__X__ ** Done in the WYSIWYG
+
+
+Tier 1: Base Main Activity  15
+____ All items there
+__X__ Correct starting values/text
+__X__ Different landscape layouts with all items present
+
+Tier 2: View and Events  21
+__X__ Background starts with LTGRAY
+__X__ Game area has majority of screen
+__X__ Tribbles are present
+____ Collect works properly with 3 consecutive presses
+__X__ Reset button works with tribbles, hunger, and score
+
+Tier 3a: State Machine/Event Rules
+____ Reset button still works with all required values
+____ Eat button affects hunger and tribbles properly
+____ Eat button limited to 3 times a day
+____ New day resets the Eat and increases tribbles
+____ Bureaucrat shows up at correct times.
+____ Distract removes bureaucrat and increases hunger
+____ Distract properly enabled/disabled  *
+____ Collection removes tribbles
+____ Collection affects hunger properly
+____ Game lost/win triggered appropriately *
+____ Dialog boxes correct
+____ Bureaucrat red border when needed *
+
+Tier 3b: Floating Action  18
+____ All buttons there
+____ Icons set and distinguishable
+____ Opens/closes properly
+____ Tribble color updated
+
+Tier 3c: Layout ** 26
+____ Custom’s View’s aspect ratio constant
+__X__ Relative size of objects in view maintained
+__X__ Works in required screen sizes
+
+Tier 3d: Game Area Content  12
+____ Correct grey color according to hunger
+__X__ Correct number of tribbles according to count
+
+Tier 3e: Rotation 20
+__X__ Required state saved on rotation
+
+Tier 4: Extensions  30
+Extension 1: 2b 5pts: updates on newDay and reset
+Extension 2: 2d 25pts
+etc.
+ */
+
 package edu.sdsmt.stopthetribblesfinnryan.Control;
 
 import androidx.annotation.NonNull;

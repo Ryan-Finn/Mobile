@@ -10,18 +10,20 @@ import java.util.Random;
 
 public class Game {
     private final ArrayList<Tribble> tribbles = new ArrayList<>();
-    private static final Random random = new Random();
+    private final Random random;
     private final Context context;
 
-    public Game(Context context) {
+    public Game(Context context, Random random) {
         this.context = context;
+        this.random = random;
         reset();
     }
 
     public void newDay() {
-        int newCount = (int)Math.ceil(tribbles.size() * 0.25);
+        double newCount = Math.ceil(tribbles.size() * 1.25);
+        tribbles.clear();
         for (int i = 0; i < newCount; i++)
-            tribbles.add(new Tribble(context, tribbles.size() + i, random));
+            tribbles.add(new Tribble(context, i, random));
     }
 
     public void reset() {
@@ -36,13 +38,19 @@ public class Game {
     }
 
     public void saveInstanceState(@NonNull Bundle bundle) {
+        bundle.putInt("area.size", tribbles.size());
         for(Tribble tribble : tribbles)
             tribble.saveInstanceState(bundle);
     }
 
     public void restoreInstanceState(@NonNull Bundle bundle) {
-        for(Tribble tribble : tribbles)
+        Tribble tribble;
+        tribbles.clear();
+        for (int i = 0; i < bundle.getInt("area.size"); i++) {
+            tribble = new Tribble(context, i, random);
             tribble.restoreInstanceState(bundle);
+            tribbles.add(tribble);
+        }
     }
 
     public ArrayList<Tribble> getTribbles() {
