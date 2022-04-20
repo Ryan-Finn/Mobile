@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Stop the Tribbles Finn Ryan</string>
     <string name="title">RYAN FINN</string>
-    <string name="hunger">Hunger:\ </string>
-    <string name="days">Day:\ </string>
+    <string name="hungerText">Hunger:\ </string>
+    <string name="hunger">0</string>
+    <string name="daysText">Day:\ </string>
+    <string name="days">1</string>
     <string name="scoreText">Score</string>
     <string name="score">0</string>
     <string name="countText">Tribbles</string>

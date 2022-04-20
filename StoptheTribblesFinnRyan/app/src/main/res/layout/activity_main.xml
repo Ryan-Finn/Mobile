@@ -19,15 +19,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/hungerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hungerText"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?attr/onBackground"
+        app:layout_constraintBottom_toTopOf="@+id/daysText"
+        app:layout_constraintEnd_toStartOf="@+id/scoreText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scoreText" />
+
+    <TextView
+        android:id="@+id/hungerCnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hunger"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?attr/onBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/hungerText"
+        app:layout_constraintStart_toEndOf="@+id/hungerText" />
+
+    <TextView
         android:id="@+id/scoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/scoreText"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toTopOf="@+id/score"
+        app:layout_constraintBottom_toTopOf="@+id/scoreCnt"
         app:layout_constraintEnd_toStartOf="@+id/countText"
-        app:layout_constraintStart_toEndOf="@+id/hunger"
+        app:layout_constraintStart_toEndOf="@+id/hungerText"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -38,49 +60,47 @@
         android:text="@string/countText"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toTopOf="@+id/count"
+        app:layout_constraintBottom_toTopOf="@+id/tribbleCnt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/scoreText"
         app:layout_constraintTop_toTopOf="@+id/scoreText"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/hunger"
+        android:id="@+id/daysText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hunger"
+        android:text="@string/daysText"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toTopOf="@+id/days"
-        app:layout_constraintEnd_toStartOf="@+id/scoreText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scoreText" />
+        app:layout_constraintBottom_toBottomOf="@+id/scoreCnt"
+        app:layout_constraintStart_toStartOf="@+id/hungerText"
+        app:layout_constraintTop_toBottomOf="@+id/hungerText" />
 
     <TextView
-        android:id="@+id/days"
+        android:id="@+id/daysCnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/days"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/score"
-        app:layout_constraintStart_toStartOf="@+id/hunger"
-        app:layout_constraintTop_toBottomOf="@+id/hunger" />
+        android:textColor="?attr/colorOnBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/daysText"
+        app:layout_constraintStart_toEndOf="@+id/daysText" />
 
     <TextView
-        android:id="@+id/count"
+        android:id="@+id/tribbleCnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/count"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/score"
+        app:layout_constraintBottom_toBottomOf="@+id/scoreCnt"
         app:layout_constraintEnd_toEndOf="@+id/countText"
         app:layout_constraintStart_toStartOf="@+id/countText"
         app:layout_constraintTop_toBottomOf="@+id/countText" />
 
     <TextView
-        android:id="@+id/score"
+        android:id="@+id/scoreCnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/score"
@@ -95,14 +115,14 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/eat"
+        app:layout_constraintBottom_toTopOf="@+id/eatBtn"
+        app:layout_constraintDimensionRatio="3:4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score" />
+        app:layout_constraintTop_toBottomOf="@+id/scoreCnt" />
 
     <Button
-        android:id="@+id/newDay"
+        android:id="@+id/dayBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -113,32 +133,15 @@
         android:onClick="newDay"
         android:text="@string/newDay"
         android:textColor="?attr/onPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/reset"
-        app:layout_constraintEnd_toStartOf="@+id/eat"
+        app:layout_constraintBottom_toTopOf="@+id/resetBtn"
+        app:layout_constraintEnd_toStartOf="@+id/eatBtn"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/eat"
+        app:layout_constraintTop_toTopOf="@+id/eatBtn"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/reset"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:background="?attr/primary"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:onClick="reset"
-        android:text="@string/reset"
-        android:textColor="?attr/onPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/distract"
-        app:layout_constraintEnd_toStartOf="@+id/distract"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/newDay"
-        app:layout_constraintTop_toBottomOf="@+id/newDay" />
-
-    <Button
-        android:id="@+id/eat"
+        android:id="@+id/eatBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -150,15 +153,48 @@
         android:onClick="eat"
         android:text="@string/eat"
         android:textColor="?attr/onPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/distract"
-        app:layout_constraintEnd_toStartOf="@+id/collect"
-        app:layout_constraintStart_toEndOf="@+id/newDay"
+        app:layout_constraintBottom_toTopOf="@+id/distractBtn"
+        app:layout_constraintEnd_toStartOf="@+id/collectBtn"
+        app:layout_constraintStart_toEndOf="@+id/dayBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/distract"
+        android:id="@+id/collectBtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:background="?attr/primary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:onClick="collect"
+        android:text="@string/collect"
+        android:textColor="?attr/onPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/distractBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/eatBtn"
+        app:layout_constraintTop_toTopOf="@+id/eatBtn" />
+
+    <Button
+        android:id="@+id/resetBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:background="?attr/primary"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:onClick="reset"
+        android:text="@string/reset"
+        android:textColor="?attr/onPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/distractBtn"
+        app:layout_constraintEnd_toStartOf="@+id/distractBtn"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/dayBtn"
+        app:layout_constraintTop_toBottomOf="@+id/dayBtn" />
+
+    <Button
+        android:id="@+id/distractBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -171,24 +207,8 @@
         android:text="@string/distract"
         android:textColor="?attr/onPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/eat"
-        app:layout_constraintStart_toEndOf="@+id/reset"
-        app:layout_constraintTop_toBottomOf="@+id/eat" />
-
-    <Button
-        android:id="@+id/collect"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:background="?attr/primary"
-        android:insetTop="0dp"
-        android:insetBottom="0dp"
-        android:onClick="collect"
-        android:text="@string/collect"
-        android:textColor="?attr/onPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/distract"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/eat"
-        app:layout_constraintTop_toTopOf="@+id/eat" />
+        app:layout_constraintEnd_toEndOf="@+id/eatBtn"
+        app:layout_constraintStart_toEndOf="@+id/resetBtn"
+        app:layout_constraintTop_toBottomOf="@+id/eatBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

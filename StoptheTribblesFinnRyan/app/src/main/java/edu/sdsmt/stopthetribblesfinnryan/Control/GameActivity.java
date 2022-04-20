@@ -86,13 +86,13 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         view = this.findViewById(R.id.GameArea);
 
-        hunger = findViewById(R.id.hunger);
-        days = findViewById(R.id.days);
-        score = findViewById(R.id.score);
-        tribbles = findViewById(R.id.count);
+        hunger = findViewById(R.id.hungerCnt);
+        days = findViewById(R.id.daysCnt);
+        score = findViewById(R.id.scoreCnt);
+        tribbles = findViewById(R.id.tribbleCnt);
 
-        eat = findViewById(R.id.eat);
-        distract = findViewById(R.id.distract);
+        eat = findViewById(R.id.eatBtn);
+        distract = findViewById(R.id.distractBtn);
 
         init();
     }

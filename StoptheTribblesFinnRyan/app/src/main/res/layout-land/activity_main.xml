@@ -15,9 +15,31 @@
         android:text="@string/title"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/score"
+        app:layout_constraintBottom_toBottomOf="@+id/scoreCnt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hungerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hungerText"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?attr/onBackground"
+        app:layout_constraintBottom_toTopOf="@+id/daysText"
+        app:layout_constraintEnd_toStartOf="@+id/scoreText"
+        app:layout_constraintStart_toEndOf="@+id/title"
+        app:layout_constraintTop_toTopOf="@+id/scoreText" />
+
+    <TextView
+        android:id="@+id/hungerCnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hunger"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="?attr/colorOnBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/hungerText"
+        app:layout_constraintStart_toEndOf="@+id/hungerText" />
 
     <TextView
         android:id="@+id/scoreText"
@@ -26,9 +48,9 @@
         android:text="@string/scoreText"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toTopOf="@+id/score"
+        app:layout_constraintBottom_toTopOf="@+id/scoreCnt"
         app:layout_constraintEnd_toStartOf="@+id/countText"
-        app:layout_constraintStart_toEndOf="@+id/hunger"
+        app:layout_constraintStart_toEndOf="@+id/hungerText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -39,49 +61,47 @@
         android:text="@string/countText"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toTopOf="@+id/count"
+        app:layout_constraintBottom_toTopOf="@+id/tribbleCnt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/scoreText"
         app:layout_constraintTop_toTopOf="@+id/scoreText"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/hunger"
+        android:id="@+id/daysText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hunger"
+        android:text="@string/daysText"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toTopOf="@+id/days"
-        app:layout_constraintEnd_toStartOf="@+id/scoreText"
-        app:layout_constraintStart_toEndOf="@+id/title"
-        app:layout_constraintTop_toTopOf="@+id/scoreText" />
+        app:layout_constraintBottom_toBottomOf="@+id/scoreCnt"
+        app:layout_constraintStart_toStartOf="@+id/hungerText"
+        app:layout_constraintTop_toBottomOf="@+id/hungerText" />
 
     <TextView
-        android:id="@+id/days"
+        android:id="@+id/daysCnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/days"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/score"
-        app:layout_constraintStart_toStartOf="@+id/hunger"
-        app:layout_constraintTop_toBottomOf="@+id/hunger" />
+        android:textColor="?attr/colorOnBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/daysText"
+        app:layout_constraintStart_toEndOf="@+id/daysText" />
 
     <TextView
-        android:id="@+id/count"
+        android:id="@+id/tribbleCnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/count"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="?attr/onBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/score"
+        app:layout_constraintBottom_toBottomOf="@+id/scoreCnt"
         app:layout_constraintEnd_toEndOf="@+id/countText"
         app:layout_constraintStart_toStartOf="@+id/countText"
         app:layout_constraintTop_toBottomOf="@+id/countText" />
 
     <TextView
-        android:id="@+id/score"
+        android:id="@+id/scoreCnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/score"
@@ -93,112 +113,74 @@
 
     <edu.sdsmt.stopthetribblesfinnryan.View.GameView
         android:id="@+id/GameArea"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/newDay"
-        app:layout_constraintEnd_toEndOf="@+id/reset"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/score"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:layout_width="100dp"
+        android:layout_height="92dp"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="62dp" />
 
     <Button
-        android:id="@+id/newDay"
-        android:layout_width="0dp"
+        android:id="@+id/dayBtn"
+        android:layout_width="236dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="8dp"
         android:background="?attr/primary"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:onClick="newDay"
         android:text="@string/newDay"
         android:textColor="?attr/onPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/reset"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GameArea" />
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="355dp" />
 
     <Button
-        android:id="@+id/reset"
-        android:layout_width="0dp"
+        android:id="@+id/resetBtn"
+        android:layout_width="236dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="8dp"
         android:background="?attr/primary"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:onClick="reset"
         android:text="@string/reset"
         android:textColor="?attr/onPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/distract"
-        app:layout_constraintStart_toEndOf="@+id/newDay"
-        app:layout_constraintTop_toTopOf="@+id/newDay" />
+        tools:layout_editor_absoluteX="248dp"
+        tools:layout_editor_absoluteY="355dp" />
 
     <Button
-        android:id="@+id/distract"
-        android:layout_width="0dp"
+        android:id="@+id/distractBtn"
+        android:layout_width="236dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="?attr/primary"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:onClick="distract"
         android:text="@string/distract"
         android:textColor="?attr/onPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/reset"
-        app:layout_constraintTop_toTopOf="@+id/newDay" />
+        tools:layout_editor_absoluteX="488dp"
+        tools:layout_editor_absoluteY="355dp" />
 
     <Button
-        android:id="@+id/eat"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
+        android:id="@+id/eatBtn"
+        android:layout_width="236dp"
+        android:layout_height="142dp"
         android:background="?attr/primary"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:onClick="eat"
         android:text="@string/eat"
         android:textColor="?attr/onPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/collect"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/collect"
-        app:layout_constraintTop_toTopOf="@+id/GameArea"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintBottom_toTopOf="@+id/resetBtn"
+        app:layout_constraintStart_toEndOf="@+id/dayBtn" />
 
     <Button
-        android:id="@+id/collect"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
+        android:id="@+id/collectBtn"
+        android:layout_width="236dp"
+        android:layout_height="142dp"
         android:background="?attr/primary"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:onClick="collect"
         android:text="@string/collect"
         android:textColor="?attr/onPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/GameArea"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/distract"
-        app:layout_constraintTop_toBottomOf="@+id/eat"
-        app:layout_constraintVertical_weight="1" />
+        tools:layout_editor_absoluteX="488dp"
+        tools:layout_editor_absoluteY="208dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
