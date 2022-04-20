@@ -5,9 +5,9 @@
     <string name="hunger">0</string>
     <string name="daysText">Day:\ </string>
     <string name="days">1</string>
-    <string name="scoreText">Score</string>
+    <string name="scoreText">Score:\ </string>
     <string name="score">0</string>
-    <string name="countText">Tribbles</string>
+    <string name="countText">Tribbles:\ </string>
     <string name="count">100</string>
     <string name="newDay">New Day</string>
     <string name="reset">Reset</string>
