@@ -74,6 +74,7 @@ import edu.sdsmt.stopthetribblesfinnryan.R;
 import edu.sdsmt.stopthetribblesfinnryan.View.GameView;
 
 public class GameActivity extends AppCompatActivity {
+    private StateMachine sm;
     private GameView view;
     private TextView hunger, days, score, tribbles;
     private Button eat, distract;
