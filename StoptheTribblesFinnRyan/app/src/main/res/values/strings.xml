@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">Stop the Tribbles Finn Ryan</string>
+    <string name="fab">FAB</string>
+    <string name="fabDefault">FAB Default</string>
+    <string name="fabGreen">FAB Green</string>
+    <string name="fabRed">FAB Red</string>
     <string name="title">RYAN FINN</string>
-    <string name="hungerText">Hunger:\ </string>
+    <string name="hungerText">Hunger</string>
     <string name="hunger">0</string>
-    <string name="daysText">Day:\ </string>
+    <string name="daysText">Day</string>
     <string name="days">1</string>
-    <string name="scoreText">Score:\ </string>
+    <string name="scoreText">Score</string>
     <string name="score">0</string>
-    <string name="countText">Tribbles:\ </string>
+    <string name="countText">Tribbles</string>
     <string name="count">100</string>
     <string name="newDay">New Day</string>
     <string name="reset">Reset</string>

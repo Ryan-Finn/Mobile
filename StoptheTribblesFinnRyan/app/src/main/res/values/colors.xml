@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primaryDay">#FF6200EE</color>
-    <color name="onPrimaryDay">#FFFFFFFF</color>
+    <color name="onPrimaryDay">@android:color/white</color>
     <color name="primaryVariantDay">#FF3700B3</color>
-    <color name="onPrimaryVariantDay">#FFFFFFFF</color>
+    <color name="onPrimaryVariantDay">@android:color/white</color>
     <color name="secondaryDay">#FF03DAC5</color>
-    <color name="onSecondaryDay">#FF000000</color>
+    <color name="onSecondaryDay">@android:color/black</color>
     <color name="secondaryVariantDay">#FF018786</color>
-    <color name="onSecondaryVariantDay">#FFFFFFFF</color>
+    <color name="onSecondaryVariantDay">@android:color/white</color>
 
     <color name="primaryNight">#FF6200EE</color>
-    <color name="onPrimaryNight">#FF000000</color>
+    <color name="onPrimaryNight">@android:color/black</color>
     <color name="primaryVariantNight">#FF3700B3</color>
-    <color name="onPrimaryVariantNight">#FFFFFFFF</color>
+    <color name="onPrimaryVariantNight">@android:color/white</color>
     <color name="secondaryNight">#FF03DAC5</color>
-    <color name="onSecondaryNight">#FF000000</color>
+    <color name="onSecondaryNight">@android:color/black</color>
     <color name="secondaryVariantNight">#FF03DAC5</color>
-    <color name="onSecondaryVariantNight">#FF000000</color>
+    <color name="onSecondaryVariantNight">@android:color/black</color>
 
-    <color name="backgroundDay">#FFFFFFFF</color>
-    <color name="onBackgroundDay">#FF000000</color>
+    <color name="backgroundDay">@android:color/white</color>
+    <color name="onBackgroundDay">@android:color/black</color>
 
-    <color name="backgroundNight">#FF000000</color>
-    <color name="onBackgroundNight">#FFFFFFFF</color>
+    <color name="backgroundNight">@android:color/black</color>
+    <color name="onBackgroundNight">@android:color/white</color>
 </resources>

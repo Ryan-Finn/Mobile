@@ -48,7 +48,7 @@ Tier 3e: Rotation 20
 __X__ Required state saved on rotation
 
 Tier 4: Extensions  30
-Extension 1: 2b 5pts: updates on newDay and reset
+Extension 1: 2b 5pts: updates on newDay, eat, and reset
 Extension 2: 2d 25pts
 etc.
  */
@@ -59,10 +59,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import edu.sdsmt.stopthetribblesfinnryan.R;
 import edu.sdsmt.stopthetribblesfinnryan.View.GameView;
@@ -71,6 +77,8 @@ public class GameActivity extends AppCompatActivity {
     private GameView view;
     private TextView hunger, days, score, tribbles;
     private Button eat, distract;
+    private Animation fromBottom, toBottom;
+    private FloatingActionButton fabDefault, fabC1, fabC2;
     private int hungerLevel, dayCount, eatCount, scoreCount, tribbleCount, lastBureau;
     public static final String h = "game.hunger";
     public static final String d = "game.days";
@@ -78,7 +86,7 @@ public class GameActivity extends AppCompatActivity {
     public static final String s = "game.score";
     public static final String l = "game.last";
     public static final String b = "game.bureau";
-    private boolean bureau;
+    private boolean bureau, clicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +94,38 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         view = this.findViewById(R.id.gameView);
 
-        hunger = findViewById(R.id.hungerCnt);
         days = findViewById(R.id.daysCnt);
+        hunger = findViewById(R.id.hungerCnt);
         score = findViewById(R.id.scoreCnt);
         tribbles = findViewById(R.id.tribbleCnt);
 
         eat = findViewById(R.id.eatBtn);
         distract = findViewById(R.id.distractBtn);
+
+        fromBottom = AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim);
+        toBottom = AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fabDefault = findViewById(R.id.fabDefault);
+        fabC1 = findViewById(R.id.fabColorOne);
+        fabC2 = findViewById(R.id.fabColorTwo);
+        fabDefault.setImageTintList(ColorStateList.valueOf(Color.BLACK));
+        fabC1.setImageTintList(ColorStateList.valueOf(Color.BLUE));
+        fabC2.setImageTintList(ColorStateList.valueOf(Color.RED));
+
+        fab.setOnClickListener(v -> onClick());
+        fabDefault.setOnClickListener(v -> {
+            onClick();
+            view.filterBitmap(Color.BLACK);
+        });
+        fabC1.setOnClickListener(v -> {
+            onClick();
+            view.filterBitmap(Color.BLUE);
+        });
+        fabC2.setOnClickListener(v -> {
+            onClick();
+            view.filterBitmap(Color.RED);
+        });
 
         init();
     }
@@ -117,10 +150,10 @@ public class GameActivity extends AppCompatActivity {
 
         view.restoreInstanceState(bundle);
 
-        hungerLevel = bundle.getInt(h);
         dayCount = bundle.getInt(d);
-        eatCount = bundle.getInt(e);
+        hungerLevel = bundle.getInt(h);
         scoreCount = bundle.getInt(s);
+        eatCount = bundle.getInt(e);
         lastBureau = bundle.getInt(l);
         bureau = bundle.getBoolean(b);
 
@@ -128,32 +161,53 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void init() {
-        bureau = false;
-        lastBureau = 0;
-        hungerLevel = 0;
         dayCount = 1;
+        hungerLevel = 0;
         scoreCount = 0;
         tribbleCount = 100;
         eatCount = 3;
+        lastBureau = 0;
+        bureau = false;
         updateGUI();
     }
 
+    private void onClick() {
+        clicked = !clicked;
+        fabDefault.setEnabled(clicked);
+        fabC1.setEnabled(clicked);
+        fabC2.setEnabled(clicked);
+        if (clicked) {
+            fabDefault.setVisibility(View.VISIBLE);
+            fabC1.setVisibility(View.VISIBLE);
+            fabC2.setVisibility(View.VISIBLE);
+            fabDefault.startAnimation(fromBottom);
+            fabC1.startAnimation(fromBottom);
+            fabC2.startAnimation(fromBottom);
+        } else {
+            fabDefault.startAnimation(toBottom);
+            fabC1.startAnimation(toBottom);
+            fabC2.startAnimation(toBottom);
+            fabDefault.setVisibility(View.INVISIBLE);
+            fabC1.setVisibility(View.INVISIBLE);
+            fabC2.setVisibility(View.INVISIBLE);
+        }
+    }
+
     public void updateGUI() {
-        tribbleCount = view.getTribbleCount();
+        String text = "" + dayCount;
+        days.setText(text);
 
         if (hungerLevel < 0)
                 hungerLevel = 0;
         else if (hungerLevel > 10)
                 hungerLevel = 10;
-        String text = getString(R.string.hunger) + hungerLevel;
+        text = "" + hungerLevel;
         hunger.setText(text);
-
-        text = getString(R.string.days) + dayCount;
-        days.setText(text);
 
         text = "" + scoreCount;
         score.setText(text);
 
+        tribbleCount = view.getTribbleCount();
         text = "" + tribbleCount;
         tribbles.setText(text);
 
