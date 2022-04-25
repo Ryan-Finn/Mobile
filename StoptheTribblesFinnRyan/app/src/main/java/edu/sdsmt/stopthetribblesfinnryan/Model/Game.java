@@ -1,5 +1,6 @@
 package edu.sdsmt.stopthetribblesfinnryan.Model;
 
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 
@@ -22,6 +23,7 @@ public class Game {
     private final ArrayList<Tribble> tribbles = new ArrayList<>();
 
     public Game() {
+        setColor(Color.BLACK);
         reset();
     }
 
