@@ -32,7 +32,7 @@ public class StateMachine {
 
     public void setState(StateEnum newState) {
         Log.d("STATE END", getCurrentStateName());
-        stateArray[state.ordinal()].endTask();
+        //stateArray[state.ordinal()].endTask();
         state = newState;
         Log.d("STATE START", getCurrentStateName());
         stateArray[state.ordinal()].startTask();
