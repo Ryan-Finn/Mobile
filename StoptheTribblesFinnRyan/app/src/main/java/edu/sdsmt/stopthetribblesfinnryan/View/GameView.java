@@ -1,7 +1,6 @@
 package edu.sdsmt.stopthetribblesfinnryan.View;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -21,13 +19,13 @@ import edu.sdsmt.stopthetribblesfinnryan.Model.Tribble;
 import edu.sdsmt.stopthetribblesfinnryan.R;
 
 public class GameView extends View {
-    private Game area;
+    private Game game;
     public static final Random random = new Random();
     private static Bitmap bitmap;
     private Bitmap masterBitmap;
-    private Paint fillPaint;
-    private Paint outlinePaint;
-    private int filter = Color.BLACK;
+    private static final Paint paint = new Paint();
+    private Paint fillPaint, outlinePaint;
+    private int color;
 
     public GameView(Context context) {
         super(context);
@@ -44,22 +42,21 @@ public class GameView extends View {
         init(context);
     }
 
-    public void init(Context context) {
-        TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = context.getTheme();
-
+    private void init(Context context) {
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         fillPaint.setColor(Color.LTGRAY);
 
         outlinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         outlinePaint.setStyle(Paint.Style.STROKE);
         outlinePaint.setStrokeWidth(5.0f);
-        theme.resolveAttribute(R.attr.primary, typedValue, true);
-        outlinePaint.setColor(typedValue.data);
 
         masterBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.tribble);
-        filterBitmap(filter);
-        area = new Game();
+        setColor(Color.BLACK);
+        //game = new Game();
+    }
+
+    public void giveGame(Game game) {
+        this.game = game;
     }
 
     @Override
@@ -71,7 +68,7 @@ public class GameView extends View {
         canvas.drawRect(0, 0, getWidth(), getHeight(), fillPaint);
         canvas.drawRect(0, 0, getWidth(), getHeight(), outlinePaint);
 
-        for(Tribble tribble : area.getTribbles()) {
+        for(Tribble tribble : game.getTribbles()) {
             tribble.draw(canvas, getWidth(), getHeight(), 0, 0);
             tribble.move(random.nextFloat());
         }
@@ -80,8 +77,13 @@ public class GameView extends View {
         invalidate();
     }
 
-    public void filterBitmap(int color) {
-        filter = color;
+    public void setColor(int color) {
+        this.color = color;
+        paint.setColor(color);
+        filterBitmap();
+    }
+
+    public void filterBitmap() {
         int w = masterBitmap.getWidth();
         int h = masterBitmap.getHeight();
         int[] mapSrcColor = new int[w * h];
@@ -115,20 +117,28 @@ public class GameView extends View {
         bitmap = Bitmap.createBitmap(mapDestColor, w, h, Bitmap.Config.ARGB_8888);
     }
 
-    public void newDay() {
-        area.newDay();
+    public void setFillPaint(int color) {
+        fillPaint.setColor(color);
     }
 
-    public void reset() {
-        area.reset();
+    public void setOutlinePaint(int color) {
+        outlinePaint.setColor(color);
     }
 
-    public void eat() {
-        area.eat();
+    public int getBackgroundColor() {
+        return fillPaint.getColor();
     }
 
-    public int getTribbleCount() {
-        return area.getTribbleCount();
+    public boolean isBorderOn() {
+        return outlinePaint.getColor() == Color.RED;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public static Paint getPaint() {
+        return paint;
     }
 
     public static Bitmap getBitmap() {
@@ -136,12 +146,12 @@ public class GameView extends View {
     }
 
     public void saveInstanceState(@NonNull Bundle bundle) {
-        bundle.putInt("view.filter", filter);
-        area.saveInstanceState(bundle);
+        bundle.putInt("view.color", color);
+        game.saveInstanceState(bundle);
     }
 
     public void restoreInstanceState(@NonNull Bundle bundle) {
-        filterBitmap(bundle.getInt("view.filter"));
-        area.restoreInstanceState(bundle);
+        setColor(bundle.getInt("view.color"));
+        game.restoreInstanceState(bundle);
     }
 }

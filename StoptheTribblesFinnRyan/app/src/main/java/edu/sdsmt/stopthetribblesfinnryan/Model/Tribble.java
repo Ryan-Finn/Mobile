@@ -1,7 +1,6 @@
 package edu.sdsmt.stopthetribblesfinnryan.Model;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -41,9 +40,10 @@ public class Tribble {
 
         canvas.translate(x, y);
         canvas.scale(second_scale, second_scale);
-        canvas.rotate(ang * 180 / (float)Math.PI);
-        canvas.translate(-width / 2f, -height / 2f);
-        canvas.drawBitmap(GameView.getBitmap(), 0, 0, null);
+        canvas.drawCircle(0, 0, width / 2f, GameView.getPaint());
+//        canvas.rotate(ang * 180 / (float)Math.PI);
+//        canvas.translate(-width / 2f, -height / 2f);
+//        canvas.drawBitmap(GameView.getBitmap(), 0, 0, null);
 
         canvas.restore();
     }
