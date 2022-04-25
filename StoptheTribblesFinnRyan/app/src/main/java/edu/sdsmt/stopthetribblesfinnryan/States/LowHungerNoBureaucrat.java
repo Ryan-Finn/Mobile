@@ -16,15 +16,15 @@ public class LowHungerNoBureaucrat extends State {
         if (game.isBureaucratPresent())
             machine.setState(StateMachine.StateEnum.LOWYES);
         else if (game.getHunger() > 3)
-            machine.setState(StateMachine.StateEnum.MIDNO);
+            machine.setState(StateMachine.StateEnum.MIDNO); // GRADING: TRANSITION_TO_MID
 
-        if (game.isLost() || game.isWon())
+        if (game.isLost() || game.isWon())  // GRADING: DIALOG
             activity.endGame(game.isWon());
     }
 
     @Override
     public void startTask() {
-        activity.setDistract(game.isBureaucratPresent());
+        activity.setDistract(game.isBureaucratPresent());   // GRADING: DISABLE
         activity.setFillPaint(Color.LTGRAY);
         activity.setOutlinePaint(GameActivity.defaultColor);
     }
@@ -32,5 +32,5 @@ public class LowHungerNoBureaucrat extends State {
     @Override
     public int maintenanceTask() {
         return 25;
-    }
+    }   // GRADING: COLLECT
 }

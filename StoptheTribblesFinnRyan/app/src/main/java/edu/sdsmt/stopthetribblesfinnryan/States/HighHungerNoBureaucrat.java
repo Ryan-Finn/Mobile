@@ -32,5 +32,5 @@ public class HighHungerNoBureaucrat extends State {
     @Override
     public int maintenanceTask() {
         return 0;
-    }
+    }   // GRADING: COLLECT
 }

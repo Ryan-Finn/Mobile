@@ -34,5 +34,5 @@ public class MidHungerWithBureaucrat extends State {
     @Override
     public int maintenanceTask() {
         return 5;
-    }
+    }   // GRADING: COLLECT
 }
