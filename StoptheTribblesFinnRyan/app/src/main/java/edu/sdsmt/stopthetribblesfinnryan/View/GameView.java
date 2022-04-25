@@ -1,8 +1,6 @@
 package edu.sdsmt.stopthetribblesfinnryan.View;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,33 +14,28 @@ import java.util.Random;
 
 import edu.sdsmt.stopthetribblesfinnryan.Model.Game;
 import edu.sdsmt.stopthetribblesfinnryan.Model.Tribble;
-import edu.sdsmt.stopthetribblesfinnryan.R;
 
 public class GameView extends View {
     private Game game;
     public static final Random random = new Random();
-    private static Bitmap bitmap;
-    private Bitmap masterBitmap;
-    private static final Paint paint = new Paint();
     private Paint fillPaint, outlinePaint;
-    private int color;
 
     public GameView(Context context) {
         super(context);
-        init(context);
+        init();
     }
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init();
     }
 
     public GameView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context);
+        init();
     }
 
-    private void init(Context context) {
+    private void init() {
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         fillPaint.setColor(Color.LTGRAY);
 
@@ -50,14 +43,8 @@ public class GameView extends View {
         outlinePaint.setStyle(Paint.Style.STROKE);
         outlinePaint.setStrokeWidth(5.0f);
 
-        masterBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.tribble);
-        setColor(Color.BLACK);
         game = new Game();
     }
-
-//    public void giveGame(Game game) {
-//        this.game = game;
-//    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -78,43 +65,7 @@ public class GameView extends View {
     }
 
     public void setColor(int color) {
-        this.color = color;
-        paint.setColor(color);
-        filterBitmap();
-    }
-
-    public void filterBitmap() {
-        int w = masterBitmap.getWidth();
-        int h = masterBitmap.getHeight();
-        int[] mapSrcColor = new int[w * h];
-        int[] mapDestColor = new int[w * h];
-        float[] filterHSV = new float[3];
-        float[] pixelHSV = new float[3];
-
-        masterBitmap.getPixels(mapSrcColor, 0, w, 0, 0, w, h);
-
-        Color.colorToHSV(color, filterHSV);
-
-        int index = 0;
-        for (int i = 0; i < w; i++)
-            for (int j = 0; j < h; j++) {
-                if ((mapSrcColor[index] & 0xff000000) != 0) {
-                    Color.colorToHSV(mapSrcColor[index], pixelHSV);
-
-                    pixelHSV[0] = filterHSV[0];
-                    if (color == Color.BLACK) {
-                        pixelHSV[1] = 0;
-                        pixelHSV[2] -= 0.67f;
-                        if (pixelHSV[2] < 0)
-                            pixelHSV[2] = 0;
-                    }
-
-                    mapDestColor[index] = Color.HSVToColor(pixelHSV);
-                }
-                index++;
-            }
-
-        bitmap = Bitmap.createBitmap(mapDestColor, w, h, Bitmap.Config.ARGB_8888);
+        game.setColor(color);
     }
 
     public void setFillPaint(int color) {
@@ -137,21 +88,11 @@ public class GameView extends View {
         return game;
     }
 
-    public static Paint getPaint() {
-        return paint;
-    }
-
-    public static Bitmap getBitmap() {
-        return bitmap;
-    }
-
     public void saveInstanceState(@NonNull Bundle bundle) {
-        bundle.putInt("view.color", color);
         game.saveInstanceState(bundle);
     }
 
     public void restoreInstanceState(@NonNull Bundle bundle) {
-        setColor(bundle.getInt("view.color"));
         game.restoreInstanceState(bundle);
     }
 }

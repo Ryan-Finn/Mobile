@@ -80,7 +80,7 @@ public class GameActivity extends AppCompatActivity {
     private StateMachine sm;
     private GameView view;
     private TextView hunger, days, score, tribbles;
-    private Button eat, distract;
+    private Button eat;
     private Animation fromBottom, toBottom;
     private FloatingActionButton fabDefault, fabC1, fabC2;
     private boolean clicked = false;
@@ -97,8 +97,6 @@ public class GameActivity extends AppCompatActivity {
 
         view = this.findViewById(R.id.gameView);
         game = view.getGame();
-        //game = new Game();
-        //view.giveGame(game);
         sm = new StateMachine(game, this);
 
         days = findViewById(R.id.daysCnt);
@@ -107,7 +105,6 @@ public class GameActivity extends AppCompatActivity {
         tribbles = findViewById(R.id.tribbleCnt);
 
         eat = findViewById(R.id.eatBtn);
-        distract = findViewById(R.id.distractBtn);
 
         fromBottom = AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim);
         toBottom = AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim);
@@ -175,12 +172,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    public void onUpdate() {
-        sm.onUpdate();
-        updateGUI();
-    }
-
-    public void updateGUI() {
+    private void updateGUI() {
         int dayCount = game.getTurns();
         int hungerLevel = game.getHunger();
         int scoreCount = game.getScore();
@@ -204,6 +196,11 @@ public class GameActivity extends AppCompatActivity {
         eat.setText(text);
 
         view.invalidate();
+    }
+
+    public void onUpdate() {
+        sm.onUpdate();
+        updateGUI();
     }
 
     public void newDay(View v) {
@@ -230,10 +227,6 @@ public class GameActivity extends AppCompatActivity {
     public void collect(View v) {
         game.collectTribbles(sm.getCollection());
         onUpdate();
-    }
-
-    public void setDistract(boolean set) {
-        distract.setEnabled(set);
     }
 
     public void setFillPaint(int color) {

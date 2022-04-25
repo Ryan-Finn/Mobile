@@ -1,5 +1,6 @@
 package edu.sdsmt.stopthetribblesfinnryan.Model;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ public class Game {
     public static final String l = "game.last";
     public static final String b = "game.bureau";
     private boolean bureau = false;
+    private int color;
+    private static final Paint paint = new Paint();
 
     private final ArrayList<Tribble> tribbles = new ArrayList<>();
 
@@ -57,6 +60,8 @@ public class Game {
 
     public void eat() {
         eatCount--;
+        if (eatCount < 0)
+            eatCount = 0;
 
         if (hungerLevel == 0)
             tribbleCount *= 2;
@@ -106,7 +111,13 @@ public class Game {
             hungerLevel = 10;
     }
 
+    public void setColor(int color) {
+        this.color = color;
+        paint.setColor(color);
+    }
+
     public void saveInstanceState(@NonNull Bundle bundle) {
+        bundle.putInt("view.color", color);
         bundle.putInt(h, hungerLevel);
         bundle.putInt(d, dayCount);
         bundle.putInt(e, eatCount);
@@ -121,6 +132,7 @@ public class Game {
     }
 
     public void restoreInstanceState(@NonNull Bundle bundle) {
+        setColor(bundle.getInt("view.color"));
         dayCount = bundle.getInt(d);
         hungerLevel = bundle.getInt(h);
         scoreCount = bundle.getInt(s);
@@ -135,6 +147,10 @@ public class Game {
             tribble.restoreInstanceState(bundle);
             tribbles.add(tribble);
         }
+    }
+
+    public static Paint getPaint() {
+        return paint;
     }
 
     public int getHunger() {

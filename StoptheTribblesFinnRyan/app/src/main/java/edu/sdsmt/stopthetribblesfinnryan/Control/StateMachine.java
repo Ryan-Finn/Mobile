@@ -1,7 +1,6 @@
 package edu.sdsmt.stopthetribblesfinnryan.Control;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -31,20 +30,16 @@ public class StateMachine {
     }
 
     public void setState(StateEnum newState) {
-        Log.d("STATE END", getCurrentStateName());
-        //stateArray[state.ordinal()].endTask();
+        // stateArray[state.ordinal()].endTask();
         state = newState;
-        Log.d("STATE START", getCurrentStateName());
         stateArray[state.ordinal()].startTask();
     }
 
     public void onUpdate() {
-        Log.d("STATE UPDATE", getCurrentStateName());
         stateArray[state.ordinal()].doTask();
     }
 
     public int getCollection() {
-        Log.d("STATE MAINTENANCE", getCurrentStateName());
         return stateArray[state.ordinal()].maintenanceTask();
     }
 

@@ -26,7 +26,7 @@ public class MidHungerWithBureaucrat extends State {
 
     @Override
     public void startTask() {
-        activity.setDistract(game.isBureaucratPresent());
+        distract.setEnabled(true);
         activity.setFillPaint(Color.GRAY);
         activity.setOutlinePaint(Color.RED);
     }

@@ -10,14 +10,14 @@ import java.util.Random;
 import edu.sdsmt.stopthetribblesfinnryan.View.GameView;
 
 public class Tribble {
-    private int width, height, id;
+    private final int width, height, id;
     private float x, y, relX, relY, ang;
     private static final float scale = 0.5f;
     private boolean toggle = false;
 
     public Tribble(int id) {
-        //this.width = GameView.getBitmap().getWidth();
-        //this.height = GameView.getBitmap().getHeight();
+        this.width = 200;
+        this.height = 200;
         this.id = id;
         Random rand = GameView.random;
         this.relX = rand.nextFloat();
@@ -26,10 +26,6 @@ public class Tribble {
     }
 
     public void draw(Canvas canvas, float canvas_width, float canvas_height, float canvasX, float canvasY) {
-        if(width == 0){
-            width = GameView.getBitmap().getWidth();
-            height = GameView.getBitmap().getHeight();
-        }
         x = canvasX + width * scale / 2;
         y = canvasY + height * scale / 2;
 
@@ -44,10 +40,7 @@ public class Tribble {
 
         canvas.translate(x, y);
         canvas.scale(second_scale, second_scale);
-        canvas.drawCircle(0, 0, width / 2f, GameView.getPaint());
-//        canvas.rotate(ang * 180 / (float)Math.PI);
-//        canvas.translate(-width / 2f, -height / 2f);
-//        canvas.drawBitmap(GameView.getBitmap(), 0, 0, null);
+        canvas.drawCircle(0, 0, width / 2f, Game.getPaint());
 
         canvas.restore();
     }

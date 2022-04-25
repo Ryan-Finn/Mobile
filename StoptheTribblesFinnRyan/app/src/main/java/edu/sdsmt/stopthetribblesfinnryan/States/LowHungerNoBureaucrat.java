@@ -24,7 +24,7 @@ public class LowHungerNoBureaucrat extends State {
 
     @Override
     public void startTask() {
-        activity.setDistract(game.isBureaucratPresent());   // GRADING: DISABLE
+        distract.setEnabled(false);   // GRADING: DISABLE
         activity.setFillPaint(Color.LTGRAY);
         activity.setOutlinePaint(GameActivity.defaultColor);
     }

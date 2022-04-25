@@ -24,7 +24,7 @@ public class HighHungerWithBureaucrat extends State {
 
     @Override
     public void startTask() {
-        activity.setDistract(game.isBureaucratPresent());
+        distract.setEnabled(true);
         activity.setFillPaint(Color.DKGRAY);
         activity.setOutlinePaint(Color.RED);
     }
