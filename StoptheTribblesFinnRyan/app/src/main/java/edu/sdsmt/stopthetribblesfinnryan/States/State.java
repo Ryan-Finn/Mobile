@@ -5,9 +5,9 @@ import edu.sdsmt.stopthetribblesfinnryan.Control.StateMachine;
 import edu.sdsmt.stopthetribblesfinnryan.Model.Game;
 
 public abstract class State {
-    protected Game game;
-    protected GameActivity activity;
-    protected StateMachine machine;
+    protected final Game game;
+    protected final GameActivity activity;
+    protected final StateMachine machine;
 
     public State(Game game, GameActivity activity, StateMachine machine) {
         this.game = game;
@@ -16,7 +16,6 @@ public abstract class State {
     }
 
     public abstract void doTask();
-    public abstract void endTask();
     public abstract void startTask();
     public abstract int maintenanceTask();
 }

@@ -52,12 +52,12 @@ public class GameView extends View {
 
         masterBitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.tribble);
         setColor(Color.BLACK);
-        //game = new Game();
+        game = new Game();
     }
 
-    public void giveGame(Game game) {
-        this.game = game;
-    }
+//    public void giveGame(Game game) {
+//        this.game = game;
+//    }
 
     @Override
     protected void onDraw(Canvas canvas) {

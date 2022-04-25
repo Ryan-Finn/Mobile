@@ -96,9 +96,9 @@ public class GameActivity extends AppCompatActivity {
         defaultColor = typedValue.data;
 
         view = this.findViewById(R.id.gameView);
-        //game = view.getGame();
-        game = new Game();
-        view.giveGame(game);
+        game = view.getGame();
+        //game = new Game();
+        //view.giveGame(game);
         sm = new StateMachine(game, this);
 
         days = findViewById(R.id.daysCnt);
