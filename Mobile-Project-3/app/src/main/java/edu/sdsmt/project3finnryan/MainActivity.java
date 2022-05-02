@@ -9,6 +9,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -17,9 +21,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.OrientationEventListener;
+import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -45,6 +52,80 @@ public class MainActivity extends AppCompatActivity {
     private Location locStart, locEnd;
     private static final int NEED_PERMISSIONS = 1;
 
+    private SensorManager sensorManager;
+    private AccelListener accelListener;
+    private Sensor accelSensor;
+    private static int surfaceRotation;
+    private OrientationEventListener orientationListener;
+    private static float x, y, z, ax, ay, az = 0;
+
+    private static class AccelListener implements SensorEventListener {
+        @Override
+        public void onAccuracyChanged(Sensor arg0, int arg1) {}
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            float a = 0.95f;
+            x = (1 - a) * event.values[0] + a * x;
+            y = (1 - a) * event.values[1] + a * y;
+            z = (1 - a) * event.values[2] + a * z;
+
+            switch(surfaceRotation) {
+                default:
+                    ax = x;
+                    ay = y;
+                    az = z;
+                    break;
+                case Surface.ROTATION_90:
+                    ax = -y;
+                    ay = x;
+                    az = z;
+                    break;
+                case Surface.ROTATION_180:
+                    ax = -x;
+                    ay = -y;
+                    az = z;
+                    break;
+                case Surface.ROTATION_270:
+                    ax = y;
+                    ay = -x;
+                    az = z;
+                    break;
+            }
+
+            Log.d("onSensorChanged", "" + ax + ", " + ay + ", " + az);
+        }
+    }
+
+    private void getOrientation() {
+        WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+        surfaceRotation = wm.getDefaultDisplay().getRotation();
+    }
+
+    public void onResume() {
+        super.onResume();
+        orientationListener.enable();
+
+        sensorManager = (SensorManager)this.getSystemService(Context.SENSOR_SERVICE);
+        accelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        if (accelSensor != null) {
+            accelListener = new AccelListener();
+            sensorManager.registerListener(accelListener, accelSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
+
+    public void onPause() {
+        super.onPause();
+        orientationListener.disable();
+
+        if (accelSensor != null) {
+            sensorManager.unregisterListener(accelListener);
+            accelListener = null;
+            accelSensor = null;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -69,6 +150,13 @@ public class MainActivity extends AppCompatActivity {
         viewLongitude = findViewById(R.id.textLongitude);
         viewDistance = findViewById(R.id.textDistance);
         viewProvider = findViewById(R.id.textProvider);
+
+        orientationListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_NORMAL) {
+            @Override
+            public void onOrientationChanged(int i) {
+                getOrientation();
+            }
+        };
     }
 
     @Override
