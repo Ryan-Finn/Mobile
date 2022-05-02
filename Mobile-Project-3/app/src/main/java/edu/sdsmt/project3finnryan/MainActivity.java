@@ -30,8 +30,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import edu.sdsmt.project3finnryan.R;
-
 public class MainActivity extends AppCompatActivity {
     private final ActiveListener activeListener = new ActiveListener();
     private LocationManager locationManager;
