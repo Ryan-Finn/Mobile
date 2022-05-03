@@ -11,7 +11,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 public class MainView extends View {
-    private final static int factor = 1000000000;
+    private final static int factor = 2000000000;
     private float startLat, startLong, latitude, longitude = 0;
     private Paint fillPaint, outlinePaint, penPaint;
     private Bitmap canvasBitmap = null;
