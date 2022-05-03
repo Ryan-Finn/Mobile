@@ -97,7 +97,7 @@ public class MainView extends View {
             for (int i = 0; i < w; i++)
                 for (int j = 0; j < h; j++)
                     if ((i - X) * (i - X) + (j - Y) * (j - Y) <= R * R)
-                        mapDest[j * w + i] = Color.BLACK;
+                        mapDest[j * w + i] = Color.DKGRAY;
         }
 
         canvasBitmap = Bitmap.createBitmap(mapDest, w, h, Bitmap.Config.ARGB_8888);
