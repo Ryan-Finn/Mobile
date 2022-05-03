@@ -4,13 +4,5 @@
     <string name="textLabelProvider">Provider:</string>
     <string name="textLabelLatitude">Latitude:</string>
     <string name="textLabelLongitude">Longitude:</string>
-    <string name="textNewLocLabel">New Location</string>
-    <string name="editLocation">Address or location</string>
-    <string name="buttonNewLocation">New</string>
     <string name="denied">Permission Denied. Distance finding will not work!</string>
-    <string name="mclaury">McLaury Building</string>
-    <string name="grubby">Grubby</string>
-    <string name="home">Home</string>
-    <string name="exception">Failed to communicate with geolocation services</string>
-    <string name="couldnotfind">Unable to locate address</string>
 </resources>
