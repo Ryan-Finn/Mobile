@@ -16,8 +16,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.OrientationEventListener;
-import android.view.Surface;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,12 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean valid = false;
     private TextView viewProvider, viewLatitude, viewLongitude;
     private static final int NEED_PERMISSIONS = 1;
-    private static int surfaceRotation;
-    private static float x, y, z = 0;
+    private static float z = 0;
 
     private AccelListener accelListener;
     private ActiveListener activeListener;
-    private OrientationEventListener orientationListener;
 
     private Sensor accelSensor;
     private SensorManager sensorManager;
@@ -54,12 +50,6 @@ public class MainActivity extends AppCompatActivity {
         viewLongitude = findViewById(R.id.textLongitude);
 
         activeListener = new ActiveListener();
-        orientationListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_UI) {
-            @Override
-            public void onOrientationChanged(int i) {
-                getOrientation();
-            }
-        };
 
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
     }
@@ -78,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        orientationListener.enable();
 
         sensorManager = (SensorManager)this.getSystemService(Context.SENSOR_SERVICE);
         accelSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -92,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        orientationListener.disable();
 
         if (accelSensor != null) {
             sensorManager.unregisterListener(accelListener);
@@ -132,11 +120,6 @@ public class MainActivity extends AppCompatActivity {
         viewLongitude.setText(String.format(Locale.getDefault(),"%1$6.7fm", (float)longitude));
         view.setStartLocation((float)latitude, (float)longitude);
         view.setLocation((float)latitude, (float)longitude);
-    }
-
-    private void getOrientation() {
-        WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
-        surfaceRotation = wm.getDefaultDisplay().getRotation();
     }
 
     private void registerListeners() {
@@ -203,35 +186,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent event) {
             float a = 0.95f;
-            float ax, ay, az;
-            x = (1 - a) * event.values[0] + a * x;
-            y = (1 - a) * event.values[1] + a * y;
             z = (1 - a) * event.values[2] + a * z;
-
-            switch(surfaceRotation) {
-                default:
-                    ax = x;
-                    ay = y;
-                    az = z;
-                    break;
-                case Surface.ROTATION_90:
-                    ax = -y;
-                    ay = x;
-                    az = z;
-                    break;
-                case Surface.ROTATION_180:
-                    ax = -x;
-                    ay = -y;
-                    az = z;
-                    break;
-                case Surface.ROTATION_270:
-                    ax = y;
-                    ay = -x;
-                    az = z;
-                    break;
-            }
-
-            view.setScale(az / 10f);
+            view.setScale(z / 10f);
         }
     }
 }
